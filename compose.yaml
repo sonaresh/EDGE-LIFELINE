@@ -1,0 +1,74 @@
+name: edge-lifeline-phase1
+
+x-foundation-service: &foundation-service
+  image: edge-lifeline/foundation:${IMAGE_TAG:-phase1-v0.1.1}
+  user: "10001:10001"
+  restart: "no"
+  read_only: true
+  tmpfs:
+    - /tmp:size=16m,mode=1777
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  networks:
+    - control
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/readyz', timeout=2).read()"]
+    interval: 5s
+    timeout: 3s
+    retries: 10
+    start_period: 5s
+
+services:
+  cloud:
+    <<: *foundation-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_IMAGE: ${PYTHON_IMAGE:-python:3.12.13-slim-bookworm}
+        BUILD_REVISION: ${BUILD_REVISION:-unversioned}
+        BUILD_TIMESTAMP: ${BUILD_TIMESTAMP:-unknown}
+    hostname: cloud
+    environment:
+      EDGE_LIFELINE_NODE_ID: cloud
+      EDGE_LIFELINE_NODE_ROLE: cloud
+      EDGE_LIFELINE_ENVIRONMENT: research
+    ports:
+      - "127.0.0.1:18080:8080"
+
+  edge-a:
+    <<: *foundation-service
+    hostname: edge-a
+    environment:
+      EDGE_LIFELINE_NODE_ID: edge-a
+      EDGE_LIFELINE_NODE_ROLE: edge
+      EDGE_LIFELINE_ENVIRONMENT: research
+    ports:
+      - "127.0.0.1:18081:8080"
+
+  edge-b:
+    <<: *foundation-service
+    hostname: edge-b
+    environment:
+      EDGE_LIFELINE_NODE_ID: edge-b
+      EDGE_LIFELINE_NODE_ROLE: edge
+      EDGE_LIFELINE_ENVIRONMENT: research
+    ports:
+      - "127.0.0.1:18082:8080"
+
+  edge-c:
+    <<: *foundation-service
+    hostname: edge-c
+    environment:
+      EDGE_LIFELINE_NODE_ID: edge-c
+      EDGE_LIFELINE_NODE_ROLE: edge
+      EDGE_LIFELINE_ENVIRONMENT: research
+    ports:
+      - "127.0.0.1:18083:8080"
+
+networks:
+  control:
+    name: edge-lifeline-phase1-control
+    driver: bridge

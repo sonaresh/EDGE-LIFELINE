@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "edge-lifeline"
+version = "0.1.1"
+description = "Reproducible research prototype for proof-carrying degraded autonomy and causal recovery"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Naresh Somara" }]
+dependencies = [
+  "fastapi>=0.116,<1",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.10,<3",
+  "uvicorn[standard]>=0.35,<1",
+]
+
+[dependency-groups]
+dev = [
+  "cyclonedx-bom>=6.0,<8",
+  "httpx>=0.28,<1",
+  "hypothesis>=6.130,<7",
+  "mypy>=1.17,<2",
+  "pip-audit>=2.9,<3",
+  "pytest>=8.4,<10",
+  "pytest-cov>=6.2,<8",
+  "pyyaml>=6.0,<7",
+  "ruff>=0.12,<1",
+  "types-pyyaml>=6.0,<7",
+]
+
+[project.scripts]
+edge-lifeline = "edge_lifeline.foundation.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/edge_lifeline"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+markers = [
+  "integration: requires a local HTTP or container boundary",
+  "security: validates fail-safe and information-exposure behavior",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["edge_lifeline"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "S", "UP", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests"]
+mypy_path = "src"

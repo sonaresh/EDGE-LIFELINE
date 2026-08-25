@@ -1,0 +1,30 @@
+[CmdletBinding()]
+param()
+
+$ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $true
+Set-StrictMode -Version Latest
+
+$Checks = @(
+    @{ Name = 'PowerShell'; Command = $null; Action = { $PSVersionTable.PSVersion.ToString() } },
+    @{ Name = 'Windows'; Command = 'Get-ComputerInfo'; Action = { (Get-ComputerInfo).WindowsProductName } },
+    @{ Name = 'WSL'; Command = 'wsl'; Action = { wsl --status 2>&1 | Out-String } },
+    @{ Name = 'Docker'; Command = 'docker'; Action = { docker version 2>&1 | Out-String } },
+    @{ Name = 'Compose'; Command = 'docker'; Action = { docker compose version 2>&1 | Out-String } },
+    @{ Name = 'Python312'; Command = 'py'; Action = { py -3.12 --version 2>&1 | Out-String } },
+    @{ Name = 'UV'; Command = 'uv'; Action = { uv --version 2>&1 | Out-String } },
+    @{ Name = 'Git'; Command = 'git'; Action = { git --version 2>&1 | Out-String } }
+)
+
+foreach ($Check in $Checks) {
+    try {
+        if ($Check.Command -and -not (Get-Command $Check.Command -ErrorAction SilentlyContinue)) {
+            throw "Command '$($Check.Command)' was not found."
+        }
+        $Detail = (& $Check.Action).Trim()
+        [pscustomobject]@{ Check = $Check.Name; Status = 'AVAILABLE'; Detail = $Detail }
+    }
+    catch {
+        [pscustomobject]@{ Check = $Check.Name; Status = 'UNAVAILABLE'; Detail = $_.Exception.Message }
+    }
+}

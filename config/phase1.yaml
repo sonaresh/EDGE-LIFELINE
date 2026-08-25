@@ -1,0 +1,19 @@
+schema_version: phase1-config-v1
+topology:
+  cloud_nodes: 1
+  edge_nodes: 3
+  node_ids: [cloud, edge-a, edge-b, edge-c]
+reproducibility:
+  canonical_seed: 20260825
+  python: "3.12"
+  package_manager: uv
+security:
+  published_interface: 127.0.0.1
+  run_as_uid: 10001
+  read_only_root_filesystem: true
+  dropped_capabilities: all
+scope:
+  phase: 1
+  authority_logic_enabled: false
+  aws_enabled: false
+
