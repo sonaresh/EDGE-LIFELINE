@@ -16,3 +16,5 @@ results/raw/*
 results/processed/*
 !results/processed/.gitkeep
 
+
+*.zip
