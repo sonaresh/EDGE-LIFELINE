@@ -212,6 +212,7 @@ def main() -> None:
     args.output.write_text(
         json.dumps(build_vector(), indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
 
 
