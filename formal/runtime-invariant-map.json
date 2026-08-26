@@ -1,0 +1,22 @@
+{
+  "schema_version": "phase2-runtime-map-v1",
+  "scope_note": "Phase 2 executable/model checks; cryptographic byte verification begins in Phase 3.",
+  "mappings": [
+    {"id": "I1", "runtime": "assert_monotonic_trace", "tla": "I1_MonotonicContraction"},
+    {"id": "I2", "runtime": "assert_parent_chain_bounded", "tla": "I2_ParentBounded"},
+    {"id": "I3", "runtime": "HazardVector.fail_safe and calculate_envelope", "tla": "guards abstract invalid evidence"},
+    {"id": "I4", "runtime": "LeaseTimeBounds.validate", "tla": "I4_ConservativeTime"},
+    {"id": "I5", "runtime": "consume_nonce", "tla": "I5_AntiReplay"},
+    {"id": "I6", "runtime": "assert_proof_before_effect", "tla": "I6_ProofBeforeEffect"},
+    {"id": "I7", "runtime": "AuthorityEnvelope, calculate_envelope, and assert_aggregate_budget", "tla": "I15_AggregateChildBudget; other impact dimensions abstracted"},
+    {"id": "I8", "runtime": "evidence_complete", "tla": "proofCommitted Boolean abstraction"},
+    {"id": "I9", "runtime": "state_machine.transition", "tla": "I9_NoReconnectGrant"},
+    {"id": "I10", "runtime": "DAE reconciliation-class contraction and state transition", "tla": "I10_NoAutomaticEffectReplay"},
+    {"id": "I11", "runtime": "EmergencyCapability.validate", "tla": "I11_OverrideBounded"},
+    {"id": "I12", "runtime": "QUARANTINED transition", "tla": "Quarantine action and I13_EffectStateSafe"},
+    {"id": "I13", "runtime": "integer per-mille calculation and sorted trace", "tla": "deterministic action relation for a selected transition"},
+    {"id": "I14", "runtime": "assert_proof_before_effect", "tla": "I6_ProofBeforeEffect abstraction"},
+    {"id": "I15", "runtime": "assert_aggregate_budget", "tla": "I15_AggregateChildBudget"},
+    {"id": "I16", "runtime": "assert_parent_chain_bounded", "tla": "I16_IssuerCeiling"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "phase1-external-acceptance-v1",
+  "recorded_at_utc": "2026-08-26T04:17:30Z",
+  "decision": "PASS",
+  "phase1_complete": true,
+  "phase2_authorized": true,
+  "accepted_source_commit": "d3d065f5e2dfafa8a319a9ed319fbe5e4626d5e8",
+  "local_archive": {
+    "name": "EDGE-LIFELINE-Phase1-Acceptance-Evidence-20260826T002327Z.zip",
+    "sha256": "ca4655151c1332045e238a9f247d662c7a6292bc4571c0753ff493b6f98d7d40"
+  },
+  "ci_archive": {
+    "name": "phase1-validation-evidence.zip",
+    "sha256": "4ff7287c6bf5cc6310f54d6e322f060908988e74e6dd4748a2b5d1eaea189648"
+  },
+  "review_basis": [
+    "both evidence manifests verified all 13 entries",
+    "both source manifests contained the same 42 paths and hashes",
+    "both provenance records identified the accepted source commit and a clean tree",
+    "Windows and Linux runs each reported 38 passing tests",
+    "Compose evidence reported one cloud and three healthy edge services",
+    "SBOM and dependency audit evidence were present"
+  ],
+  "scope": "Phase 1 reproducibility foundation only",
+  "reviewer": "independent prototype handoff review"
+}

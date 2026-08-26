@@ -1,77 +1,128 @@
 # EDGE-LIFELINE
 
-Proof-Carrying Degraded Autonomy and Causal Recovery for Mission-Critical Cloud-Edge Systems.
+Proof-Carrying Degraded Autonomy and Causal Recovery for Mission-Critical
+Cloud-Edge Systems.
 
-This repository is currently limited to **Phase 1: reproducibility foundation**. It creates a minimal FastAPI process, a one-cloud/three-edge Docker Compose topology, deterministic run identifiers, provenance capture, CI, test gates, and cleanup commands. It does not yet implement authority leases, proof verification, the DAE, MVSG optimization, disconnected identity, trusted-time logic, causal reconciliation, experiments, or AWS deployment.
+Release **v0.2.0** is the Phase 2 candidate. It adds an executable typed-authority
+model, deterministic Degraded Autonomy Envelope (DAE) contraction, bounded-time
+validation, isolation and recovery state transitions, a distinct emergency branch,
+runtime invariants, and a finite TLA+ model with seeded negative variants.
 
-Release: **v0.1.1**, the reviewed Phase 1 foundation. Phase 1 remains conditional until the Compose and CI evidence are independently reviewed.
+Phase 1 was independently accepted against local Windows and GitHub Actions evidence.
+Phase 2 is not complete until its local and CI evidence are independently reviewed.
+Phase 3 cryptographic lease issuance and verification remain deliberately unimplemented.
 
-The hospital emergency-continuity case study is synthetic systems-resilience research. This is not a clinically validated medical system and must not be used for patient care.
+The hospital emergency-continuity case study is a synthetic systems-resilience
+experiment. This is not a clinically validated medical system and must not be used
+for patient care.
 
 ## Required local environment
 
-- Windows 11
-- PowerShell 7
+- Windows 10 or 11
+- PowerShell 7.4 or newer (`pwsh`, not Windows PowerShell 5.1)
 - Python 3.12
 - `uv` 0.11.33
-- Docker Desktop using the WSL2 backend for the Compose gate
+- Microsoft OpenJDK 17 or another compatible Java 17+ runtime
+- Docker Desktop with the WSL2 backend for the retained Phase 1 Compose gate
 - Git
 
-Install `uv` from PowerShell if needed:
+Install missing Phase 2 tools from an elevated PowerShell terminal if needed:
 
 ```powershell
-winget install --id=astral-sh.uv -e
+winget install --id Microsoft.PowerShell -e
+winget install --id astral-sh.uv -e
+winget install --id Microsoft.OpenJDK.17 -e
 ```
 
-## Bootstrap
+Close and reopen VS Code, select a PowerShell 7 terminal, and verify:
 
 ```powershell
-Set-Location .\edge-lifeline
+$PSVersionTable.PSVersion
 .\scripts\verify-prerequisites.ps1 | Format-Table -AutoSize
+```
+
+Every row needed for the selected gate must report `AVAILABLE`.
+
+## Bootstrap and quick runtime check
+
+```powershell
+Set-Location C:\Users\nares\OneDrive\Desktop\Prototype\EDGE-LIFELINE
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+Get-ChildItem .\scripts -Recurse -File -Filter *.ps1 | Unblock-File
 .\scripts\bootstrap.ps1
+
+$Hazards = @{
+    isolation = 100; clock = 100; data = 100; sensor = 100
+    energy = 100; resource = 100; security = 100; identity = 100
+    revocation = 100; physical = 100; financial = 100; human = 100
+} | ConvertTo-Json -Compress
+uv run edge-lifeline phase2-evaluate --hazards-json $Hazards
 ```
 
-## Run the complete Phase 1 gate
+The diagnostic output must identify the profile as synthetic and nonclinical. It is
+an executable model, not an authorization certificate.
 
-Start Docker Desktop first, then run:
+## Run the Phase 2 gate
 
 ```powershell
-.\scripts\run_phase_gate.ps1
+.\scripts\run_phase2_gate.ps1
 ```
 
-The command runs linting, formatting checks, strict type checking, unit/integration/security tests, Compose validation, four-service smoke tests, provenance capture, SBOM generation, dependency auditing, complete source hashing, resolved base-image capture, and evidence-manifest creation. Evidence is written under `evidence/phase1/generated/<UTC timestamp>/`.
+The first run downloads the official TLA+ v1.7.4 `tla2tools.jar` and verifies its
+pinned SHA-256 before execution. The gate runs formatting, lint, strict type checks,
+runtime tests with branch coverage, the positive TLC model, six expected-counterexample
+models, provenance capture, SBOM generation, and dependency auditing.
 
-The script intentionally returns `CONDITIONAL_PASS`. A final Phase 1 pass requires independent review of the generated Compose evidence and a successful CI run. After pushing the repository, the workflow runs the same Phase 1 gate and publishes its evidence archive.
+Evidence is written to `evidence/phase2/generated/<UTC timestamp>/`. A successful
+local run intentionally records `CONDITIONAL_PASS`, `phase2_complete: false`, and
+`phase3_authorized: false` until local and CI archives receive independent review.
 
-For exact replay after the first accepted run, set `PYTHON_IMAGE` to the captured `repository@sha256:digest` value before rerunning the gate.
-
-To validate code on a host without Docker, use:
+The TLC search may take several minutes depending on CPU and the worker count:
 
 ```powershell
-.\scripts\run_phase_gate.ps1 -SkipContainers
+.\scripts\run_phase2_gate.ps1 -TlcWorkers 4
 ```
 
-That is a code-only gate and does not satisfy the Compose or CI acceptance criteria.
-
-## Manual development mode
+## Preserve a local evidence archive
 
 ```powershell
-docker compose up --build --detach --wait
-Invoke-RestMethod http://127.0.0.1:18080/healthz
-Invoke-RestMethod http://127.0.0.1:18081/healthz
-Invoke-RestMethod http://127.0.0.1:18082/healthz
-Invoke-RestMethod http://127.0.0.1:18083/healthz
-docker compose down --volumes --remove-orphans
+$LatestEvidence = Get-ChildItem .\evidence\phase2\generated -Directory |
+    Sort-Object LastWriteTimeUtc -Descending |
+    Select-Object -First 1
+$EvidenceZip = Join-Path (Split-Path $PWD -Parent) `
+    "EDGE-LIFELINE-Phase2-Local-Evidence-$($LatestEvidence.Name).zip"
+Compress-Archive -Path "$($LatestEvidence.FullName)\*" `
+    -DestinationPath $EvidenceZip -Force
+Get-FileHash $EvidenceZip -Algorithm SHA256
+Get-Content (Join-Path $LatestEvidence.FullName 'gate-decision.json') -Raw
 ```
 
-## Cleanup
+Push the candidate and retain the `phase2-validation-evidence` artifact from the
+`formal` GitHub Actions job. Local and CI source manifests must resolve to the same
+commit before Phase 2 can be accepted.
+
+## Formal-model boundary
+
+The TLA+ model treats hashes and signatures as ideal primitives. It verifies protocol
+state properties, not Ed25519 or COSE bytes. The runtime model does not issue a signed
+lease and its diagnostic JSON is not a proof. Calling Phase 2 output “proof-carrying
+authorization” would therefore be scientifically misleading. That claim becomes
+eligible for testing only after Phase 3 implements canonical serialization, signing,
+verification, replay persistence, and negative cryptographic tests.
+
+See [docs/phase2/formal-model.md](docs/phase2/formal-model.md) for the model scope,
+invariant mapping, expected counterexamples, acceptance criteria, and limitations.
+
+## Cleanup and rollback
+
+Remove only reproducible Phase 2 generated state:
 
 ```powershell
-.\scripts\cleanup.ps1 -Confirm:$false
+Remove-Item .\.tools\tla2tools-1.7.4.jar -Force -ErrorAction SilentlyContinue
+Remove-Item .\evidence\phase2\generated -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item .\.venv -Recurse -Force -ErrorAction SilentlyContinue
 ```
 
-Cleanup removes only the named Phase 1 Compose runtime resources. Source files and evidence remain intact.
-
-## Phase boundary
-
-Phase 2 is not authorized by repository state. The Phase 1 gate records `phase_2_authorized: false` even when validation passes. Formal modeling begins only after explicit review and approval of the Phase 1 evidence.
+Source files and archived evidence outside the repository are unaffected. To abandon
+the candidate without destructive Git operations, switch back to the accepted Phase 1
+commit on a new branch.

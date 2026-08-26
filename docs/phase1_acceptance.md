@@ -4,6 +4,11 @@
 
 Phase 1 establishes repository structure, dependency locking, a minimal local service topology, CI, deterministic run identifiers, provenance capture, SBOM generation, tests, and cleanup. It does not implement any Phase 2 or later research mechanism.
 
+Phase 1 was subsequently accepted by independent review on 2026-08-26. The immutable
+archive hashes, accepted source commit, and review basis are recorded in
+`evidence/phase1/phase1-external-acceptance.json`. The automated Phase 1 gate remains
+historical and conditional by design; it does not rewrite its own external decision.
+
 ## Acceptance criteria
 
 | Criterion | Pass condition | Evidence |

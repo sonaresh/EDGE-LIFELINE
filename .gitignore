@@ -11,6 +11,10 @@ build/
 *.egg-info/
 .env
 evidence/phase1/generated/
+evidence/phase2/generated/
+.tools/
+.uv-cache/
+.hypothesis/
 results/raw/*
 !results/raw/.gitkeep
 results/processed/*

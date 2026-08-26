@@ -16,16 +16,21 @@ EXCLUDED_SOURCE_PARTS = {
     ".mypy_cache",
     ".pytest_cache",
     ".ruff_cache",
+    ".tools",
+    ".uv-cache",
     ".venv",
+    ".hypothesis",
     "__pycache__",
     "build",
     "dist",
 }
 EXCLUDED_SOURCE_PREFIXES = (
     "evidence/phase1/generated/",
+    "evidence/phase2/generated/",
     "results/raw/",
     "results/processed/",
 )
+EXCLUDED_SOURCE_SUFFIXES = {".zip"}
 
 
 def _command(args: list[str], cwd: Path) -> dict[str, Any]:
@@ -78,6 +83,8 @@ def discover_source_files(root: Path) -> list[str]:
             continue
         if any(relative.startswith(prefix) for prefix in EXCLUDED_SOURCE_PREFIXES):
             continue
+        if target.suffix.lower() in EXCLUDED_SOURCE_SUFFIXES:
+            continue
         if target.is_symlink():
             raise ValueError(f"source tree cannot contain symbolic links: {relative}")
         if target.is_file():
@@ -89,7 +96,7 @@ def discover_source_files(root: Path) -> list[str]:
 
 def capture_environment(root: Path) -> dict[str, Any]:
     return {
-        "schema_version": "phase1-provenance-v1",
+        "schema_version": "edge-lifeline-provenance-v1",
         "captured_at_utc": datetime.now(UTC).isoformat(),
         "python": {"version": platform.python_version(), "executable": sys.executable},
         "platform": platform.platform(),

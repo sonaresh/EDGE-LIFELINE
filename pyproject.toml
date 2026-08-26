@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "edge-lifeline"
-version = "0.1.1"
+version = "0.2.0"
 description = "Reproducible research prototype for proof-carrying degraded autonomy and causal recovery"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -43,6 +43,7 @@ testpaths = ["tests"]
 markers = [
   "integration: requires a local HTTP or container boundary",
   "security: validates fail-safe and information-exposure behavior",
+  "formal: validates executable or model-checked formal properties",
 ]
 
 [tool.coverage.run]

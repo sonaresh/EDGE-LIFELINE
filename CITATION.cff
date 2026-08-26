@@ -2,8 +2,8 @@ cff-version: 1.2.0
 message: "If you use this research artifact, cite the associated EDGE-LIFELINE paper and this software release."
 title: "EDGE-LIFELINE Research Prototype"
 type: software
-version: 0.1.1
-date-released: 2026-08-25
+version: 0.2.0
+date-released: 2026-08-26
 authors:
   - family-names: Somara
     given-names: Naresh

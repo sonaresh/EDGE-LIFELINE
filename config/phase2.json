@@ -1,0 +1,29 @@
+{
+  "schema_version": "phase2-profile-v1",
+  "case_study": "synthetic-hospital-emergency-continuity",
+  "clinical_use_permitted": false,
+  "score_unit": "integer-per-mille",
+  "required_hazards": [
+    "isolation",
+    "clock",
+    "data",
+    "sensor",
+    "energy",
+    "resource",
+    "security",
+    "identity",
+    "revocation",
+    "physical",
+    "financial",
+    "human"
+  ],
+  "bands": {
+    "guarded_at": 250,
+    "essential_at": 500,
+    "protective_at": 750,
+    "terminal_at": 950
+  },
+  "missing_mandatory_evidence_hazard": 1000,
+  "budget_floor_per_mille": 100,
+  "phase3_cryptography_implemented": false
+}

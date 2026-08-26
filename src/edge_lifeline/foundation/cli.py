@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
+from dataclasses import asdict
 from pathlib import Path
 
 from edge_lifeline import __version__
+from edge_lifeline.formal.dae import HazardDimension, HazardVector, calculate_envelope
+from edge_lifeline.formal.defaults import synthetic_hospital_envelope, synthetic_hospital_policy
 from edge_lifeline.foundation.identity import identity_as_dict, make_run_identity
 from edge_lifeline.foundation.provenance import (
     build_manifest,
@@ -38,6 +41,13 @@ def _parser() -> argparse.ArgumentParser:
     identity.add_argument("--method", required=True)
     identity.add_argument("--seed", type=int, required=True)
     identity.add_argument("--config-json", default="{}")
+
+    phase2 = sub.add_parser("phase2-evaluate")
+    phase2.add_argument(
+        "--hazards-json",
+        required=True,
+        help="JSON object containing all twelve hazard dimensions as integer per-mille values",
+    )
     return parser
 
 
@@ -58,6 +68,40 @@ def main() -> None:
         root = args.root.resolve()
         write_json(args.output, {"sha256": build_manifest(root, discover_source_files(root))})
         print(args.output)
+        return
+    if args.command == "phase2-evaluate":
+        raw_hazards = json.loads(args.hazards_json)
+        if not isinstance(raw_hazards, dict):
+            raise SystemExit("--hazards-json must decode to an object")
+        try:
+            hazards = HazardVector(
+                {HazardDimension(name): int(value) for name, value in raw_hazards.items()}
+            )
+        except (TypeError, ValueError) as error:
+            raise SystemExit(f"invalid hazard vector: {error}") from error
+        envelope = synthetic_hospital_envelope()
+        decision = calculate_envelope(
+            previous=envelope,
+            parent=envelope,
+            lease=envelope,
+            hazards=hazards,
+            policy=synthetic_hospital_policy(),
+        )
+        print(
+            json.dumps(
+                {
+                    "schema_version": "phase2-decision-diagnostic-v1",
+                    "synthetic_nonclinical": True,
+                    "band": decision.band.name,
+                    "result": decision.result.value,
+                    "allowed_actions": sorted(decision.envelope.actions),
+                    "denied_actions": list(decision.denied_actions),
+                    "budgets": asdict(decision.envelope.budgets),
+                    "justification": list(decision.justification),
+                },
+                sort_keys=True,
+            )
+        )
         return
     configuration = json.loads(args.config_json)
     if not isinstance(configuration, dict):

@@ -18,7 +18,7 @@ def test_version_command(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     invoke(monkeypatch, ["version"])
-    assert capsys.readouterr().out.strip() == "0.1.1"
+    assert capsys.readouterr().out.strip() == "0.2.0"
 
 
 def test_run_id_command(
@@ -90,7 +90,7 @@ def test_provenance_command(
         ["capture-provenance", "--root", str(tmp_path), "--output", str(output)],
     )
     assert json.loads(output.read_text(encoding="utf-8"))["schema_version"] == (
-        "phase1-provenance-v1"
+        "edge-lifeline-provenance-v1"
     )
     assert str(output) in capsys.readouterr().out
 
@@ -110,3 +110,45 @@ def test_source_manifest_command(
     manifest = json.loads(output.read_text(encoding="utf-8"))["sha256"]
     assert set(manifest) == {"src/app.py"}
     assert str(output) in capsys.readouterr().out
+
+
+def test_phase2_evaluate_command(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    hazards = {
+        name: 100
+        for name in (
+            "isolation",
+            "clock",
+            "data",
+            "sensor",
+            "energy",
+            "resource",
+            "security",
+            "identity",
+            "revocation",
+            "physical",
+            "financial",
+            "human",
+        )
+    }
+    invoke(monkeypatch, ["phase2-evaluate", "--hazards-json", json.dumps(hazards)])
+    payload = json.loads(capsys.readouterr().out)
+    assert payload["schema_version"] == "phase2-decision-diagnostic-v1"
+    assert payload["synthetic_nonclinical"] is True
+    assert payload["band"] == "NORMAL_DELEGATED"
+    assert payload["result"] == "CONTINUE_LOCALLY"
+
+
+def test_phase2_evaluate_rejects_missing_hazard(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with pytest.raises(SystemExit, match="hazard vector must be complete"):
+        invoke(monkeypatch, ["phase2-evaluate", "--hazards-json", '{"clock": 1}'])
+
+
+def test_phase2_evaluate_rejects_non_object(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with pytest.raises(SystemExit, match="must decode to an object"):
+        invoke(monkeypatch, ["phase2-evaluate", "--hazards-json", "[]"])

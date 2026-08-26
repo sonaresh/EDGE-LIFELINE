@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0 - 2026-08-26
+
+- Implement the typed multidimensional authority lattice and structural meet/subsumption.
+- Implement deterministic per-mille hazard contraction and explicit DAE bands.
+- Implement bounded trusted-time intervals, rollback detection, and conservative lease checks.
+- Implement isolation/reconnection transitions and a separate bounded emergency branch.
+- Add runtime checks for monotonicity, parent/issuer ceilings, replay, proof-before-effect,
+  evidence completeness, atomic accounting, and aggregate sibling budgets.
+- Add a three-edge, two-epoch TLA+ model and six seeded weakened configurations that must
+  produce counterexamples.
+- Keep COSE, Ed25519, authority issuance, and proof-verifier services deferred to Phase 3.
+
 ## 0.1.1 - 2026-08-25
 
 - Install container runtime dependencies from the frozen `uv.lock`.

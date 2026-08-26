@@ -18,11 +18,14 @@ Start-Transcript -Path $Transcript | Out-Null
 
 $GatePassed = $false
 try {
+    if ($PSVersionTable.PSVersion -lt [version]'7.4.0') {
+        throw "PowerShell 7.4 or newer is required; found $($PSVersionTable.PSVersion)."
+    }
     uv sync --frozen --all-groups
     uv run edge-lifeline source-manifest --root $RepoRoot --output (Join-Path $EvidenceDir 'source-manifest.json')
     $env:BUILD_REVISION = (Get-FileHash -Algorithm SHA256 (Join-Path $EvidenceDir 'source-manifest.json')).Hash.ToLowerInvariant()
     $env:BUILD_TIMESTAMP = (Get-Date).ToUniversalTime().ToString('o')
-    $env:IMAGE_TAG = "phase1-v0.1.1-$($env:BUILD_REVISION.Substring(0, 12))"
+    $env:IMAGE_TAG = "phase1-v0.2.0-$($env:BUILD_REVISION.Substring(0, 12))"
     & (Join-Path $PSScriptRoot 'verify.ps1') -SkipContainers:$SkipContainers -EvidenceDir $EvidenceDir
     uv run edge-lifeline capture-provenance --root $RepoRoot --output (Join-Path $EvidenceDir 'provenance.json')
     uv run cyclonedx-py environment --output-format JSON --output-file (Join-Path $EvidenceDir 'sbom.cdx.json')

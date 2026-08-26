@@ -41,6 +41,10 @@ def test_source_discovery_excludes_generated_and_virtual_environment(tmp_path: P
     generated = tmp_path / "evidence" / "phase1" / "generated" / "run"
     generated.mkdir(parents=True)
     (generated / "report.json").write_text("{}", encoding="utf-8")
+    generated_phase2 = tmp_path / "evidence" / "phase2" / "generated" / "run"
+    generated_phase2.mkdir(parents=True)
+    (generated_phase2 / "report.json").write_text("{}", encoding="utf-8")
+    (tmp_path / "archive.zip").write_bytes(b"not-source")
     assert discover_source_files(tmp_path) == ["src/app.py"]
 
 
@@ -58,6 +62,6 @@ def test_write_json_is_stably_sorted(tmp_path: Path) -> None:
 
 def test_environment_capture_has_required_fields() -> None:
     record = capture_environment(Path.cwd())
-    assert record["schema_version"] == "phase1-provenance-v1"
+    assert record["schema_version"] == "edge-lifeline-provenance-v1"
     assert record["python"]["version"].startswith("3.12")
     assert "docker" in record
