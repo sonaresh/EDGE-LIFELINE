@@ -3,30 +3,46 @@
 Proof-Carrying Degraded Autonomy and Causal Recovery for Mission-Critical
 Cloud-Edge Systems.
 
-Release **v0.2.0** is the Phase 2 candidate. It adds an executable typed-authority
-model, deterministic Degraded Autonomy Envelope (DAE) contraction, bounded-time
-validation, isolation and recovery state transitions, a distinct emergency branch,
-runtime invariants, and a finite TLA+ model with seeded negative variants.
+Release **v0.3.0** is the Phase 3 candidate. It implements canonical CBOR
+`COSE_Sign1` artifacts with Ed25519 signatures, explicit trust anchors, complete
+parent-chain verification, multidimensional authority subsumption, uncertain-time
+checks, context and evidence binding, and durable atomic admission state.
 
-Phase 1 was independently accepted against local Windows and GitHub Actions evidence.
-Phase 2 is not complete until its local and CI evidence are independently reviewed.
-Phase 3 cryptographic lease issuance and verification remain deliberately unimplemented.
+Phase 2 was independently accepted against matching local Windows and GitHub Actions
+evidence for commit `53b3065ac6a32ff09d9e286652661f8f4ee6986a`. Phase 3 is not
+complete until its own local and CI evidence are independently reviewed. Phase 4 is
+not authorized by an automated gate.
 
 The hospital emergency-continuity case study is a synthetic systems-resilience
 experiment. This is not a clinically validated medical system and must not be used
 for patient care.
+
+## What “Proof-Carrying” means in this candidate
+
+A consequential decision is dispatchable only after the edge has verified a signed,
+canonical decision certificate and its hash-linked authority chain, then atomically
+committed the certificate, nonce, cumulative budgets, financial exposure, and pending
+effect in SQLite. Ordinary logs do not satisfy this requirement.
+
+The candidate does **not** prove application correctness, sensor truth, clinical
+safety, hardware key protection, unbounded protocol correctness, or causal recovery.
+The TLA+ model treats cryptography ideally; byte-level cryptographic evidence and
+model-checking evidence are deliberately kept separate.
+
+See [the Phase 3 proof specification](docs/phase3/proof-carrying.md) for the normative
+profile, verifier order, trust assumptions, rejection behavior, and limitations.
 
 ## Required local environment
 
 - Windows 10 or 11
 - PowerShell 7.4 or newer (`pwsh`, not Windows PowerShell 5.1)
 - Python 3.12
-- `uv` 0.11.33
-- Microsoft OpenJDK 17 or another compatible Java 17+ runtime
-- Docker Desktop with the WSL2 backend for the retained Phase 1 Compose gate
+- `uv` (CI pins 0.11.33; the local version is captured in provenance)
 - Git
+- Java 17+ and Docker Desktop with WSL2 remain required for the Phase 1–2 regression
+  gates, but the Phase 3 proof gate itself does not create containers or paid resources.
 
-Install missing Phase 2 tools from an elevated PowerShell terminal if needed:
+Install missing tools from an elevated PowerShell terminal if needed:
 
 ```powershell
 winget install --id Microsoft.PowerShell -e
@@ -34,95 +50,60 @@ winget install --id astral-sh.uv -e
 winget install --id Microsoft.OpenJDK.17 -e
 ```
 
-Close and reopen VS Code, select a PowerShell 7 terminal, and verify:
-
-```powershell
-$PSVersionTable.PSVersion
-.\scripts\verify-prerequisites.ps1 | Format-Table -AutoSize
-```
-
-Every row needed for the selected gate must report `AVAILABLE`.
-
-## Bootstrap and quick runtime check
+Close and reopen VS Code, select a PowerShell 7 terminal, then run:
 
 ```powershell
 Set-Location C:\Users\nares\OneDrive\Desktop\Prototype\EDGE-LIFELINE
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 Get-ChildItem .\scripts -Recurse -File -Filter *.ps1 | Unblock-File
+.\scripts\verify-prerequisites.ps1 | Format-Table -AutoSize
 .\scripts\bootstrap.ps1
-
-$Hazards = @{
-    isolation = 100; clock = 100; data = 100; sensor = 100
-    energy = 100; resource = 100; security = 100; identity = 100
-    revocation = 100; physical = 100; financial = 100; human = 100
-} | ConvertTo-Json -Compress
-uv run edge-lifeline phase2-evaluate --hazards-json $Hazards
 ```
 
-The diagnostic output must identify the profile as synthetic and nonclinical. It is
-an executable model, not an authorization certificate.
-
-## Run the Phase 2 gate
+## Run the Phase 3 gate
 
 ```powershell
-.\scripts\run_phase2_gate.ps1
+.\scripts\run_phase3_gate.ps1 -BenchmarkIterations 1000
 ```
 
-The first run downloads the official TLA+ v1.7.4 `tla2tools.jar` and verifies its
-pinned SHA-256 before execution. The gate runs formatting, lint, strict type checks,
-runtime tests with branch coverage, the positive TLC model, six expected-counterexample
-models, provenance capture, SBOM generation, and dependency auditing.
+The gate performs frozen dependency installation; formatting, lint, strict typing,
+branch-aware coverage, and security-negative tests; byte-for-byte vector regeneration;
+an engineering-only proof benchmark; provenance capture; SBOM generation; and
+dependency auditing.
 
-Evidence is written to `evidence/phase2/generated/<UTC timestamp>/`. A successful
-local run intentionally records `CONDITIONAL_PASS`, `phase2_complete: false`, and
-`phase3_authorized: false` until local and CI archives receive independent review.
+Evidence is written to `evidence/phase3/generated/<UTC timestamp>/`. A successful
+automated run intentionally records `CONDITIONAL_PASS`, `phase3_complete: false`, and
+`phase4_authorized: false` until independent review compares local and CI archives.
+Benchmark values are raw engineering observations and are not acceptance thresholds or
+manuscript outcomes.
 
-The TLC search may take several minutes depending on CPU and the worker count:
-
-```powershell
-.\scripts\run_phase2_gate.ps1 -TlcWorkers 4
-```
-
-## Preserve a local evidence archive
+## Preserve the local evidence archive
 
 ```powershell
-$LatestEvidence = Get-ChildItem .\evidence\phase2\generated -Directory |
+$LatestEvidence = Get-ChildItem .\evidence\phase3\generated -Directory |
     Sort-Object LastWriteTimeUtc -Descending |
     Select-Object -First 1
 $EvidenceZip = Join-Path (Split-Path $PWD -Parent) `
-    "EDGE-LIFELINE-Phase2-Local-Evidence-$($LatestEvidence.Name).zip"
+    "EDGE-LIFELINE-Phase3-Local-Evidence-$($LatestEvidence.Name).zip"
 Compress-Archive -Path "$($LatestEvidence.FullName)\*" `
     -DestinationPath $EvidenceZip -Force
 Get-FileHash $EvidenceZip -Algorithm SHA256
 Get-Content (Join-Path $LatestEvidence.FullName 'gate-decision.json') -Raw
 ```
 
-Push the candidate and retain the `phase2-validation-evidence` artifact from the
-`formal` GitHub Actions job. Local and CI source manifests must resolve to the same
-commit before Phase 2 can be accepted.
-
-## Formal-model boundary
-
-The TLA+ model treats hashes and signatures as ideal primitives. It verifies protocol
-state properties, not Ed25519 or COSE bytes. The runtime model does not issue a signed
-lease and its diagnostic JSON is not a proof. Calling Phase 2 output “proof-carrying
-authorization” would therefore be scientifically misleading. That claim becomes
-eligible for testing only after Phase 3 implements canonical serialization, signing,
-verification, replay persistence, and negative cryptographic tests.
-
-See [docs/phase2/formal-model.md](docs/phase2/formal-model.md) for the model scope,
-invariant mapping, expected counterexamples, acceptance criteria, and limitations.
+Push the candidate and retain the `phase3-validation-evidence` artifact from the
+GitHub Actions `proof` job. Local and CI source manifests must resolve to the same
+commit and every manifest entry must verify before Phase 3 can pass.
 
 ## Cleanup and rollback
 
-Remove only reproducible Phase 2 generated state:
+Remove only reproducible Phase 3 generated state:
 
 ```powershell
-Remove-Item .\.tools\tla2tools-1.7.4.jar -Force -ErrorAction SilentlyContinue
-Remove-Item .\evidence\phase2\generated -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item .\evidence\phase3\generated -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item .\.venv -Recurse -Force -ErrorAction SilentlyContinue
 ```
 
-Source files and archived evidence outside the repository are unaffected. To abandon
-the candidate without destructive Git operations, switch back to the accepted Phase 1
-commit on a new branch.
+Frozen vectors, source code, and evidence archives outside the repository are not
+removed. To abandon the candidate, switch to the accepted Phase 2 commit on another
+branch; do not reset or delete evidence that has already been cited.

@@ -1,0 +1,27 @@
+{
+  "artifact_family": "edge-lifeline-proof-v1",
+  "cbor_profile": "RFC 8949 deterministic encoding enforced by byte re-encoding",
+  "clinical_use_permitted": false,
+  "cose_algorithm": -8,
+  "cose_tag": 18,
+  "decision_results": [
+    "CONTINUE_LOCALLY",
+    "DENY_UNSAFE_ACTION",
+    "ENTER_READ_ONLY_MODE",
+    "ISOLATE_FROM_CLOUD",
+    "PRIORITIZE_CRITICAL_WORKLOAD",
+    "RECONNECT_AND_RECONCILE",
+    "REDUCE_SERVICE",
+    "REQUEST_HUMAN_OVERRIDE",
+    "SAFE_SHUTDOWN",
+    "USE_CACHED_IDENTITY"
+  ],
+  "external_aad": "empty-byte-string",
+  "hash_algorithm": "SHA-256",
+  "key_algorithm": "Ed25519",
+  "protected_headers": [1, 4],
+  "root_authority_requires_explicit_trust_anchor": true,
+  "schema_version": "phase3-profile-v1",
+  "signature_bytes": 64,
+  "unprotected_headers_permitted": false
+}

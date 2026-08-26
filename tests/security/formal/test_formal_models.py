@@ -79,10 +79,14 @@ def test_reconnection_requires_explicit_fresh_authority() -> None:
 
 
 @pytest.mark.security
-def test_phase3_cryptography_is_not_implemented_early() -> None:
-    source = "\n".join(
-        path.read_text(encoding="utf-8") for path in Path("src").rglob("*.py")
+def test_phase3_cryptography_is_confined_to_proof_package() -> None:
+    proof_source = "\n".join(
+        path.read_text(encoding="utf-8") for path in Path("src/edge_lifeline/proof").rglob("*.py")
     ).lower()
-    assert "ed25519privatekey" not in source
-    assert "cose_sign1" not in source
-    assert "signing_key" not in source
+    non_proof_source = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in Path("src/edge_lifeline").rglob("*.py")
+        if "proof" not in path.parts
+    ).lower()
+    assert "ed25519privatekey" in proof_source
+    assert "ed25519privatekey" not in non_proof_source

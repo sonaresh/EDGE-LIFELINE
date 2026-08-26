@@ -12,6 +12,7 @@ build/
 .env
 evidence/phase1/generated/
 evidence/phase2/generated/
+evidence/phase3/generated/
 .tools/
 .uv-cache/
 .hypothesis/

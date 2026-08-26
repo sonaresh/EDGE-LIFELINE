@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 - 2026-08-26
+
+- Implement canonical CBOR and COSE_Sign1 Ed25519 authority artifacts.
+- Add cloud issuance and strict edge verification for root, child, and decision certificates.
+- Enforce parent-chain subsumption, bounded trusted time, evidence binding, and context binding.
+- Add durable SQLite anti-replay, budget accounting, certificate commit, and effect registration.
+- Add byte-level golden, mutation, replay, widening, stale-context, and atomicity tests.
+- Require cryptography 50.0.1+ after the Phase 3 dependency audit identified advisories
+  affecting the initial 46.0.7 candidate.
+
 ## 0.2.0 - 2026-08-26
 
 - Implement the typed multidimensional authority lattice and structural meet/subsumption.

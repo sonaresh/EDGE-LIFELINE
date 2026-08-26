@@ -81,3 +81,22 @@ def test_tla_tool_is_versioned_and_hash_pinned() -> None:
         "I10_NoAutomaticEffectReplay",
     ):
         assert invariant in runner
+
+
+@pytest.mark.security
+def test_phase3_gate_is_conditional_and_preserves_proof_evidence() -> None:
+    script = Path("scripts/run_phase3_gate.ps1").read_text(encoding="utf-8")
+    assert "phase2-external-acceptance.json" in script
+    assert "generate_phase3_vectors.py" in script
+    assert "proof-benchmark.json" in script
+    assert "-m security" in script
+    assert "external_review_required = $true" in script
+    assert "phase3_complete = $false" in script
+    assert "phase4_authorized = $false" in script
+    workflow = yaml.safe_load(Path(".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    steps = workflow["jobs"]["proof"]["steps"]
+    gate = next(step for step in steps if step.get("name") == "Run Phase 3 gate")
+    upload = next(step for step in steps if step.get("name") == "Upload Phase 3 evidence")
+    assert "run_phase3_gate.ps1" in gate["run"]
+    assert upload["if"] == "always()"
+    assert upload["with"]["path"] == "evidence/phase3/generated/"

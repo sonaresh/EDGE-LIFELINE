@@ -1,0 +1,16 @@
+{
+  "schema_version": "phase2-external-acceptance-v1",
+  "recorded_at_utc": "2026-08-26T04:56:16Z",
+  "decision": "PASS",
+  "phase2_complete": true,
+  "phase3_authorized": true,
+  "accepted_source_commit": "53b3065ac6a32ff09d9e286652661f8f4ee6986a",
+  "local_archive_sha256": "49d3d211da80bd19f04e159a9ae37b6a9ab323b9907d83dc9a13e749793e419e",
+  "ci_archive_sha256": "8404c77324523c63e844c30e02e18e2b8697faa0ffc03397017f863caaa46751",
+  "source_manifest_entries": 76,
+  "source_manifests_exact_match": true,
+  "tests_per_environment": 106,
+  "positive_tlc_distinct_states": 2173392,
+  "negative_expected_counterexamples_passed": 6,
+  "scientific_boundary": "Phase 2 used ideal-cryptography and proof-commitment abstractions; cryptographic proof-carrying validation begins in Phase 3."
+}

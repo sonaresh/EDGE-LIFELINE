@@ -27,6 +27,7 @@ EXCLUDED_SOURCE_PARTS = {
 EXCLUDED_SOURCE_PREFIXES = (
     "evidence/phase1/generated/",
     "evidence/phase2/generated/",
+    "evidence/phase3/generated/",
     "results/raw/",
     "results/processed/",
 )
