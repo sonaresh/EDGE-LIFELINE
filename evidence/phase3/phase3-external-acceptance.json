@@ -1,0 +1,19 @@
+{
+  "schema_version": "phase3-external-acceptance-v1",
+  "recorded_at_utc": "2026-08-26T22:13:53Z",
+  "decision": "PASS",
+  "phase3_complete": true,
+  "phase4_authorized": true,
+  "accepted_source_commit": "965e5aa7dd47ba293b3e25ac6ad388c8e2c51275",
+  "local_archive_sha256": "e5f8deaddeadad4e204f162bc4764138538a8e6dc0b6ddce6cd726c53a127ce9",
+  "ci_archive_sha256": "5511e357ec5620f6804d1a09c2caf3c4bdd94f927f09ae87bff82b13e5e1fa9f",
+  "source_manifest_entries": 96,
+  "source_manifests_exact_match": true,
+  "proof_vectors_exact_match": true,
+  "tests_per_environment": 183,
+  "security_tests_per_environment": 97,
+  "line_coverage_percent": 95.46,
+  "branch_coverage_percent": 88.19,
+  "known_dependency_vulnerabilities": 0,
+  "scientific_boundary": "Phase 3 validates proof-carrying authorization using synthetic nonclinical evidence. It does not establish clinical safety, sensor truth, hardware-key protection, or causal recovery."
+}
