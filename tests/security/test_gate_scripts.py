@@ -100,3 +100,23 @@ def test_phase3_gate_is_conditional_and_preserves_proof_evidence() -> None:
     assert "run_phase3_gate.ps1" in gate["run"]
     assert upload["if"] == "always()"
     assert upload["with"]["path"] == "evidence/phase3/generated/"
+
+
+@pytest.mark.security
+def test_phase4_gate_is_conditional_and_preserves_mvsg_evidence() -> None:
+    script = Path("scripts/run_phase4_gate.ps1").read_text(encoding="utf-8")
+    assert "phase3-external-acceptance.json" in script
+    assert "validate_phase4_oracle" in script
+    assert "generate_phase4_vectors.py" in script
+    assert "timeout-safety-junit.xml" in script
+    assert "external_review_required = $true" in script
+    assert "phase4_complete = $false" in script
+    assert "phase5_authorized = $false" in script
+    assert "PIPAPI_PYTHON_LOCATION" in script
+    workflow = yaml.safe_load(Path(".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    steps = workflow["jobs"]["mission"]["steps"]
+    gate = next(step for step in steps if step.get("name") == "Run Phase 4 gate")
+    upload = next(step for step in steps if step.get("name") == "Upload Phase 4 evidence")
+    assert "run_phase4_gate.ps1" in gate["run"]
+    assert upload["if"] == "always()"
+    assert upload["with"]["path"] == "evidence/phase4/generated/"

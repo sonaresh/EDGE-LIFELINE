@@ -1,0 +1,861 @@
+{
+  "context": {
+    "approval_level": 2,
+    "authority": {
+      "actions": [
+        "communicate",
+        "monitor",
+        "read",
+        "record"
+      ],
+      "artifact_family": "edge-lifeline-authority-v1",
+      "budgets": {
+        "action_count": 100,
+        "cpu_ms": 10000,
+        "energy_mj": 10000,
+        "memory_mb_s": 10000,
+        "network_bytes": 1000000,
+        "storage_bytes": 1000000
+      },
+      "delegation_depth_remaining": 0,
+      "isolation_epoch": "epoch-phase4-fixture",
+      "max_data_age_ms": 60000,
+      "max_financial_exposure_cents": 0,
+      "max_identity_cache_age_ms": 3600000,
+      "max_impact": 0,
+      "max_lease_horizon_ms": 60000,
+      "max_revocation_staleness_ms": 600000,
+      "min_approval": 0,
+      "min_security_posture": 1,
+      "min_sensor_confidence_per_mille": 700,
+      "mvsg_hash": "b1225b7c104a88d37495e2bfc9fcccb6d0946401de95286ec6492e5ab14698ca",
+      "policy_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "reconciliation_classes": [
+        "S1_COMMUTATIVE"
+      ],
+      "resources": [
+        "device-stream",
+        "event-ledger",
+        "local-network",
+        "medication-snapshot",
+        "patient-index",
+        "platform"
+      ],
+      "schema_version": "authority-v1",
+      "sites": [
+        "edge-a",
+        "edge-b"
+      ],
+      "time_window": {
+        "expires_at_ms": 61000,
+        "not_before_ms": 1000
+      },
+      "verifier_profile_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    "available_sites": [
+      "edge-a",
+      "edge-b"
+    ],
+    "context_id": "phase4-synthetic-normal",
+    "data_age_ms": {
+      "identity-snapshot": 1000,
+      "safety-snapshot": 1000,
+      "sensor-attestation": 100
+    },
+    "security_posture": 2,
+    "sensor_confidence_per_mille": 950,
+    "site_capacities": {
+      "edge-a": {
+        "action_count": 100,
+        "cpu_ms": 5000,
+        "energy_mj": 5000,
+        "memory_mb_s": 5000,
+        "network_bytes": 500000,
+        "storage_bytes": 500000
+      },
+      "edge-b": {
+        "action_count": 100,
+        "cpu_ms": 5000,
+        "energy_mj": 5000,
+        "memory_mb_s": 5000,
+        "network_bytes": 500000,
+        "storage_bytes": 500000
+      }
+    },
+    "starvation_ms": {
+      "audit-view": 20000,
+      "communications": 10000,
+      "identity": 0,
+      "monitoring": 0,
+      "recording": 5000,
+      "safety-data": 0
+    },
+    "unavailable_services": []
+  },
+  "context_hash": "32063d408366fe6123870dda712b9c5b7ba0ebe8236dc631a199c46e4ba29197",
+  "graph": {
+    "capabilities": [
+      {
+        "capability_id": "audit-view",
+        "deadline_ms": 500,
+        "mandatory": false,
+        "optional_utility": 30,
+        "required_units": 1
+      },
+      {
+        "capability_id": "communications",
+        "deadline_ms": 300,
+        "mandatory": true,
+        "optional_utility": 0,
+        "required_units": 1
+      },
+      {
+        "capability_id": "identity",
+        "deadline_ms": 150,
+        "mandatory": true,
+        "optional_utility": 0,
+        "required_units": 1
+      },
+      {
+        "capability_id": "monitoring",
+        "deadline_ms": 200,
+        "mandatory": true,
+        "optional_utility": 0,
+        "required_units": 1
+      },
+      {
+        "capability_id": "recording",
+        "deadline_ms": 300,
+        "mandatory": true,
+        "optional_utility": 0,
+        "required_units": 1
+      },
+      {
+        "capability_id": "safety-data",
+        "deadline_ms": 250,
+        "mandatory": true,
+        "optional_utility": 0,
+        "required_units": 1
+      }
+    ],
+    "exclusions": [
+      [
+        "external-route",
+        "local-network"
+      ]
+    ],
+    "graph_id": "synthetic-hospital-continuity",
+    "graph_version": "1.0.0",
+    "latency_constraints": [
+      {
+        "constraint_id": "identity-to-safety-data",
+        "maximum_latency_ms": 40,
+        "service_ids": [
+          "identity-cache",
+          "medication-allergy-cache"
+        ]
+      }
+    ],
+    "redundancy": [
+      {
+        "distinct_sites": true,
+        "members": [
+          "essential-monitor-a",
+          "essential-monitor-b"
+        ],
+        "minimum_selected": 2,
+        "requirement_id": "dual-monitoring-sites"
+      }
+    ],
+    "schema_version": "edge-lifeline-mvsg-v1",
+    "services": [
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [
+          "clinical-event-recorder"
+        ],
+        "authority_exposure_units": 5,
+        "capability_units": {
+          "audit-view": 1
+        },
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 20,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "event-ledger"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "optional-observability",
+        "service_id": "audit-dashboard",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [
+          "event-ledger",
+          "storage-reserve"
+        ],
+        "authority_exposure_units": 1,
+        "capability_units": {
+          "recording": 1
+        },
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "record"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "event-ledger"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 10,
+        "service_class": "recording",
+        "service_id": "clinical-event-recorder",
+        "startup_after": [],
+        "startup_time_ms": 10
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 1,
+        "capability_units": {},
+        "data_max_age_ms": {
+          "identity-snapshot": 60000
+        },
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 20,
+          "energy_mj": 20,
+          "memory_mb_s": 20,
+          "network_bytes": 1024,
+          "storage_bytes": 4096
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "patient-index"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "identity",
+        "service_id": "credential-db",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [
+          [
+            "external-route",
+            "local-network"
+          ]
+        ],
+        "and_dependencies": [
+          "identity-cache"
+        ],
+        "authority_exposure_units": 10,
+        "capability_units": {
+          "communications": 1
+        },
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "communicate"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "local-network"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 15,
+        "service_class": "communications",
+        "service_id": "emergency-communications",
+        "startup_after": [],
+        "startup_time_ms": 10
+      },
+      {
+        "allowed_sites": [
+          "edge-a"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [
+          "sensor-gateway-a"
+        ],
+        "authority_exposure_units": 1,
+        "capability_units": {
+          "monitoring": 1
+        },
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 800,
+        "optional_utility": 0,
+        "required_actions": [
+          "monitor"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "device-stream"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 10,
+        "service_class": "monitoring",
+        "service_id": "essential-monitor-a",
+        "startup_after": [],
+        "startup_time_ms": 10
+      },
+      {
+        "allowed_sites": [
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [
+          "sensor-gateway-b"
+        ],
+        "authority_exposure_units": 1,
+        "capability_units": {
+          "monitoring": 1
+        },
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 800,
+        "optional_utility": 0,
+        "required_actions": [
+          "monitor"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "device-stream"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 10,
+        "service_class": "monitoring",
+        "service_id": "essential-monitor-b",
+        "startup_after": [],
+        "startup_time_ms": 10
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 1,
+        "capability_units": {},
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 15,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 16384
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "event-ledger"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "recording",
+        "service_id": "event-ledger",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 50,
+        "capability_units": {},
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 20,
+          "energy_mj": 20,
+          "memory_mb_s": 10,
+          "network_bytes": 8192,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "local-network"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "communications",
+        "service_id": "external-route",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [
+          "credential-db"
+        ],
+        "authority_exposure_units": 1,
+        "capability_units": {
+          "identity": 1
+        },
+        "data_max_age_ms": {
+          "identity-snapshot": 60000
+        },
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "patient-index"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 10,
+        "service_class": "identity",
+        "service_id": "identity-cache",
+        "startup_after": [],
+        "startup_time_ms": 10
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 1,
+        "capability_units": {},
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 4096,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "local-network"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "communications",
+        "service_id": "local-network",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [
+          "identity-cache",
+          "signed-safety-snapshot"
+        ],
+        "authority_exposure_units": 1,
+        "capability_units": {
+          "safety-data": 1
+        },
+        "data_max_age_ms": {
+          "safety-snapshot": 60000
+        },
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "medication-snapshot"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 15,
+        "service_class": "safety-data",
+        "service_id": "medication-allergy-cache",
+        "startup_after": [],
+        "startup_time_ms": 10
+      },
+      {
+        "allowed_sites": [
+          "edge-a"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 1,
+        "capability_units": {},
+        "data_max_age_ms": {
+          "sensor-attestation": 60000
+        },
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 800,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "device-stream"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "monitoring",
+        "service_id": "sensor-gateway-a",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 1,
+        "capability_units": {},
+        "data_max_age_ms": {
+          "sensor-attestation": 60000
+        },
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 10,
+          "energy_mj": 10,
+          "memory_mb_s": 10,
+          "network_bytes": 1024,
+          "storage_bytes": 1024
+        },
+        "min_sensor_confidence_per_mille": 800,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "device-stream"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "monitoring",
+        "service_id": "sensor-gateway-b",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 1,
+        "capability_units": {},
+        "data_max_age_ms": {
+          "safety-snapshot": 60000
+        },
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 15,
+          "energy_mj": 20,
+          "memory_mb_s": 20,
+          "network_bytes": 1024,
+          "storage_bytes": 8192
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "medication-snapshot"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "safety-data",
+        "service_id": "signed-safety-snapshot",
+        "startup_after": [],
+        "startup_time_ms": 5
+      },
+      {
+        "allowed_sites": [
+          "edge-a",
+          "edge-b"
+        ],
+        "alternative_groups": [],
+        "and_dependencies": [],
+        "authority_exposure_units": 1,
+        "capability_units": {},
+        "data_max_age_ms": {},
+        "demand": {
+          "action_count": 1,
+          "cpu_ms": 5,
+          "energy_mj": 5,
+          "memory_mb_s": 5,
+          "network_bytes": 0,
+          "storage_bytes": 32768
+        },
+        "min_sensor_confidence_per_mille": 0,
+        "optional_utility": 0,
+        "required_actions": [
+          "read"
+        ],
+        "required_approval": 0,
+        "required_impact": 0,
+        "required_resources": [
+          "event-ledger"
+        ],
+        "required_security_posture": 1,
+        "response_latency_ms": 5,
+        "service_class": "recording",
+        "service_id": "storage-reserve",
+        "startup_after": [],
+        "startup_time_ms": 5
+      }
+    ]
+  },
+  "graph_hash": "b1225b7c104a88d37495e2bfc9fcccb6d0946401de95286ec6492e5ab14698ca",
+  "result": {
+    "decision": "SELECT_MVSG",
+    "plan": {
+      "context_hash": "32063d408366fe6123870dda712b9c5b7ba0ebe8236dc631a199c46e4ba29197",
+      "graph_hash": "b1225b7c104a88d37495e2bfc9fcccb6d0946401de95286ec6492e5ab14698ca",
+      "objective": [
+        13,
+        1861,
+        0
+      ],
+      "optimized_stages": 3,
+      "placements": [
+        [
+          "clinical-event-recorder",
+          "edge-b"
+        ],
+        [
+          "credential-db",
+          "edge-a"
+        ],
+        [
+          "emergency-communications",
+          "edge-b"
+        ],
+        [
+          "essential-monitor-a",
+          "edge-a"
+        ],
+        [
+          "essential-monitor-b",
+          "edge-b"
+        ],
+        [
+          "event-ledger",
+          "edge-a"
+        ],
+        [
+          "identity-cache",
+          "edge-b"
+        ],
+        [
+          "local-network",
+          "edge-a"
+        ],
+        [
+          "medication-allergy-cache",
+          "edge-b"
+        ],
+        [
+          "sensor-gateway-a",
+          "edge-a"
+        ],
+        [
+          "sensor-gateway-b",
+          "edge-b"
+        ],
+        [
+          "signed-safety-snapshot",
+          "edge-a"
+        ],
+        [
+          "storage-reserve",
+          "edge-a"
+        ]
+      ],
+      "schema_version": "edge-lifeline-mvsg-plan-v1",
+      "solver_status": "MAX_OPTIONAL_UTILITY:OPTIMAL",
+      "startup_order": [
+        "credential-db",
+        "event-ledger",
+        "identity-cache",
+        "local-network",
+        "emergency-communications",
+        "sensor-gateway-a",
+        "essential-monitor-a",
+        "sensor-gateway-b",
+        "essential-monitor-b",
+        "signed-safety-snapshot",
+        "medication-allergy-cache",
+        "storage-reserve",
+        "clinical-event-recorder"
+      ]
+    },
+    "plan_hash": "23ce8ade61fdd310ecbfba14bd40ab2bbcdc9996c711f6864d9541891f528e18",
+    "reason": "LEXICOGRAPHIC_OPTIMUM_VALIDATED",
+    "validation_certificate": {
+      "checks": [
+        "AUTHORITY_BUDGET",
+        "AUTHORITY_MVSG_BOUND",
+        "CONTEXT_HASH_BOUND",
+        "DEADLINES",
+        "DEPENDENCY_CLOSURE",
+        "EXCLUSION",
+        "GRAPH_HASH_BOUND",
+        "MISSION_COVERAGE",
+        "OBJECTIVE_RECOMPUTED",
+        "REDUNDANCY",
+        "SERVICE_ELIGIBILITY",
+        "SITE_CAPACITY",
+        "STARTUP_ORDER"
+      ],
+      "context_hash": "32063d408366fe6123870dda712b9c5b7ba0ebe8236dc631a199c46e4ba29197",
+      "failures": [],
+      "graph_hash": "b1225b7c104a88d37495e2bfc9fcccb6d0946401de95286ec6492e5ab14698ca",
+      "plan_hash": "23ce8ade61fdd310ecbfba14bd40ab2bbcdc9996c711f6864d9541891f528e18",
+      "recomputed_objective": [
+        13,
+        1861,
+        0
+      ],
+      "schema_version": "edge-lifeline-mvsg-validation-v1",
+      "valid": true,
+      "validator_version": "phase4-validator-v1"
+    },
+    "validation_certificate_hash": "39e12bedc0efaf76b7820dc30aca9d3d20b7373e194a32c0794ed98c6a7791d9"
+  },
+  "schema_version": "edge-lifeline-phase4-vector-v1",
+  "synthetic_nonclinical": true
+}

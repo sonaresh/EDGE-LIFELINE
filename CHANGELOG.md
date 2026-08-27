@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 - 2026-08-27
+
+- Implement deterministic OR-Tools CP-SAT Mission-Viable Service Graph selection.
+- Enforce mandatory capability coverage, AND/OR dependencies, exclusions, locality,
+  distinct-site redundancy, startup order, deadlines, freshness, and authority/resource budgets.
+- Add a solver-independent validator that recomputes every hard constraint and objective.
+- Add safe timeout behavior: validated incumbent, revalidated prior graph, or safe shutdown.
+- Add a brute-force reference oracle, frozen graph/plan vector, property tests, and engineering
+  benchmark with raw samples.
+- Preserve the synthetic, nonclinical boundary and defer mission-outcome experiments to Phase 8.
+
 ## 0.3.0 - 2026-08-26
 
 - Implement canonical CBOR and COSE_Sign1 Ed25519 authority artifacts.

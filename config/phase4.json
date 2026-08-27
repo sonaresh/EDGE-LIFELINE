@@ -1,0 +1,27 @@
+{
+  "schema_version": "edge-lifeline-phase4-config-v1",
+  "synthetic_nonclinical": true,
+  "solver": {
+    "engine": "OR-Tools CP-SAT",
+    "deterministic_workers": 1,
+    "random_seed": 0,
+    "default_timeout_seconds": 5,
+    "lexicographic_objectives": [
+      "satisfy mandatory mission constraints",
+      "minimize selected service count",
+      "minimize resource, authority exposure, and starvation cost",
+      "maximize optional mission utility"
+    ]
+  },
+  "validator": {
+    "implementation": "solver-independent",
+    "version": "phase4-validator-v1",
+    "timeout_policy": "validated incumbent, revalidated prior graph, or safe shutdown"
+  },
+  "acceptance": {
+    "minimum_coverage_percent": 90,
+    "oracle_random_cases": 30,
+    "benchmark_iterations": 500,
+    "external_review_required": true
+  }
+}
