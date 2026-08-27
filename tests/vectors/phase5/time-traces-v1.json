@@ -1,0 +1,67 @@
+{
+  "anchor": {
+    "anchor_id": "anchor-1",
+    "boot_id": "boot-a",
+    "boottime_anchor_ms": 10000,
+    "drift_parts_per_million": 100,
+    "hardware_retained_across_restart": false,
+    "initial_error_ms": 25,
+    "maximum_anchor_age_ms": 60000,
+    "restart_suspend_penalty_ms": 500,
+    "schema_version": "edge-lifeline-time-anchor-v1",
+    "source_artifact_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "utc_estimate_ms": 1000000
+  },
+  "cases": {
+    "normal": {
+      "active": true,
+      "anchor_hash": "5e6dc2be182481e348c65383a3f6477c34d7f181301512feb0381878c3a8a77f",
+      "failures": [],
+      "interval": {
+        "lower_ms": 1009974,
+        "upper_ms": 1010026
+      },
+      "mode": "AUTHENTICATED_BOUNDED_TIME",
+      "schema_version": "edge-lifeline-bounded-time-estimate-v1",
+      "wall_clock_diagnostic_ms": null
+    },
+    "restart_without_retained_anchor": {
+      "active": false,
+      "anchor_hash": "5e6dc2be182481e348c65383a3f6477c34d7f181301512feb0381878c3a8a77f",
+      "failures": [
+        "RESTART_REQUIRES_REANCHOR"
+      ],
+      "interval": null,
+      "mode": "PROTECTIVE_READ_ONLY",
+      "schema_version": "edge-lifeline-bounded-time-estimate-v1",
+      "wall_clock_diagnostic_ms": null
+    },
+    "rollback": {
+      "active": false,
+      "anchor_hash": "5e6dc2be182481e348c65383a3f6477c34d7f181301512feb0381878c3a8a77f",
+      "failures": [
+        "BOOTTIME_ROLLBACK"
+      ],
+      "interval": null,
+      "mode": "PROTECTIVE_READ_ONLY",
+      "schema_version": "edge-lifeline-bounded-time-estimate-v1",
+      "wall_clock_diagnostic_ms": null
+    },
+    "stale_anchor": {
+      "active": false,
+      "anchor_hash": "5e6dc2be182481e348c65383a3f6477c34d7f181301512feb0381878c3a8a77f",
+      "failures": [
+        "AUTHENTICATED_ANCHOR_STALE"
+      ],
+      "interval": {
+        "lower_ms": 1059969,
+        "upper_ms": 1060031
+      },
+      "mode": "PROTECTIVE_READ_ONLY",
+      "schema_version": "edge-lifeline-bounded-time-estimate-v1",
+      "wall_clock_diagnostic_ms": null
+    }
+  },
+  "schema_version": "edge-lifeline-phase5-time-traces-v1",
+  "wall_clock_authority": false
+}

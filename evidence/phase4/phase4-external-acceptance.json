@@ -1,0 +1,33 @@
+{
+  "schema_version": "phase4-external-acceptance-v1",
+  "recorded_at_utc": "2026-08-27T22:00:00Z",
+  "decision": "PASS",
+  "phase4_complete": true,
+  "phase5_authorized": true,
+  "accepted_source_commit": "6fb314effdc5e45145593bbdd582e19f60914d5f",
+  "source_archive_sha256": "aca97e87661f4f359ecacb8316714b6767ab1c58be979b8dc8b4291f7985787b",
+  "local_archive_sha256": "504f0236455fe14ff413f8227514004da635159a31bd114b18cbbb66f51cca35",
+  "ci_archive_sha256": "838ea59157606c112419f221d02bed40c7b72eb502473e076a6937531e7a6caa",
+  "source_manifest_entries": 115,
+  "source_manifests_exact_match": true,
+  "evidence_manifest_entries_per_environment": 15,
+  "evidence_manifest_mismatches": 0,
+  "tests_per_environment": 215,
+  "security_tests_per_environment": 114,
+  "timeout_safety_tests_per_environment": 3,
+  "line_coverage_percent": 94.39,
+  "branch_coverage_percent": 85.59,
+  "oracle_cases": 30,
+  "oracle_cases_passed": 30,
+  "frozen_vector_sha256": "0937a6689909c215001c845d7aa260ffc1b4ea948018516c5cc3541b758b91b0",
+  "frozen_vectors_exact_match": true,
+  "sbom_components_per_environment": 93,
+  "known_dependency_vulnerabilities": 0,
+  "platform_dependency_difference": {
+    "windows_only": "colorama==0.4.6",
+    "linux_only": "uvloop==0.22.1",
+    "assessment": "EXPECTED_PLATFORM_MARKER_DIFFERENCE"
+  },
+  "github_actions_run_url": "https://github.com/sonaresh/EDGE-LIFELINE/actions/runs/33118358424",
+  "scientific_boundary": "Phase 4 validates the deterministic MVSG mechanism on synthetic engineering fixtures. It does not establish clinical safety or the Phase 8 H5 mission-utility outcome."
+}

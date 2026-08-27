@@ -1,0 +1,14 @@
+{
+  "data_sha256": {},
+  "entrypoints": [
+    "edge_lifeline/phase5/result"
+  ],
+  "opa_version": "1.19.1",
+  "policy_hash": "5838ef29696753efcaf7297a09636d4ac29caf6fb1a0fb3e0658654de33544f8",
+  "policy_version": "phase5-policy-v1",
+  "schema_version": "edge-lifeline-policy-bundle-v1",
+  "source_sha256": {
+    "policy/edge_lifeline.rego": "0840de59ab28eb0d3e3ef23692d40fca571cf0861af09cb6af9877fd1992d08f"
+  },
+  "transport_metadata_excluded": true
+}

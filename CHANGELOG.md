@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 - 2026-08-27
+
+- Add fail-safe cached pseudonymous identity evaluation with explicit assurance, role,
+  cache-age, expiry, and last-authenticated revocation-snapshot bounds.
+- Add authenticated UTC-anchor plus boot-aware elapsed-time intervals with drift, restart,
+  suspend penalty, rollback/discontinuity detection, and protective read-only behavior.
+- Add canonical semantic Rego/data/entrypoint/schema/OPA-version policy hashing.
+- Pin OPA 1.19.1, verify the official binary SHA-256 before use, and restrict policy calls to
+  loopback or absolute Unix-domain sockets.
+- Add strict OPA response/hash/version checks, deterministic identity/time/policy fixtures,
+  Rego tests, security-negative tests, and a reproducible Phase 5 evidence gate.
+- Preserve the synthetic nonclinical boundary and keep causal reconciliation locked to Phase 6.
+
 ## 0.4.0 - 2026-08-27
 
 - Implement deterministic OR-Tools CP-SAT Mission-Viable Service Graph selection.

@@ -1,0 +1,66 @@
+{
+  "assertion": {
+    "assurance": 2,
+    "expires_at_ms": 10000,
+    "issued_at_ms": 1000,
+    "issuer": "hospital-idp",
+    "revocation_snapshot_id": "snapshot-17",
+    "roles": [
+      "operator"
+    ],
+    "schema_version": "edge-lifeline-identity-assertion-v1",
+    "source_artifact_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "subject_id": "pseudonym:ward-a:operator-7"
+  },
+  "cases": {
+    "revoked_in_snapshot": {
+      "assertion_hash": "07e0cae90b0ddb671393f46572a2f5a7f97b44077b6907b999400a5fd1a24d32",
+      "cache_age_ms": 1100,
+      "decision": "DENY_UNSAFE_ACTION",
+      "eligible": false,
+      "failures": [
+        "IDENTITY_REVOKED_IN_LAST_AUTHENTICATED_SNAPSHOT"
+      ],
+      "revocation_age_ms": 600,
+      "revocation_snapshot_hash": "c3d33667621263867fc9cfab31b89827b066b66867034a7328f10756243b5277",
+      "schema_version": "edge-lifeline-cached-identity-decision-v1",
+      "subject_hash": "a3c18154c02a50faeec9d1759cb5ba8340e16892318fbd5df79634d183809455"
+    },
+    "stale_identity_and_revocation": {
+      "assertion_hash": "07e0cae90b0ddb671393f46572a2f5a7f97b44077b6907b999400a5fd1a24d32",
+      "cache_age_ms": 6001,
+      "decision": "DENY_UNSAFE_ACTION",
+      "eligible": false,
+      "failures": [
+        "IDENTITY_CACHE_STALE",
+        "REVOCATION_STATE_STALE"
+      ],
+      "revocation_age_ms": 5501,
+      "revocation_snapshot_hash": "267e078505c0bde801de83acdf7cae836738bc69be3e748b58fbf66efb4a392a",
+      "schema_version": "edge-lifeline-cached-identity-decision-v1",
+      "subject_hash": "a3c18154c02a50faeec9d1759cb5ba8340e16892318fbd5df79634d183809455"
+    },
+    "valid_cached_identity": {
+      "assertion_hash": "07e0cae90b0ddb671393f46572a2f5a7f97b44077b6907b999400a5fd1a24d32",
+      "cache_age_ms": 1100,
+      "decision": "USE_CACHED_IDENTITY",
+      "eligible": true,
+      "failures": [],
+      "revocation_age_ms": 600,
+      "revocation_snapshot_hash": "267e078505c0bde801de83acdf7cae836738bc69be3e748b58fbf66efb4a392a",
+      "schema_version": "edge-lifeline-cached-identity-decision-v1",
+      "subject_hash": "a3c18154c02a50faeec9d1759cb5ba8340e16892318fbd5df79634d183809455"
+    }
+  },
+  "claim_boundary": "Revocation state is the last authenticated snapshot, not current state.",
+  "schema_version": "edge-lifeline-phase5-identity-fixtures-v1",
+  "snapshot": {
+    "generated_at_ms": 1500,
+    "issuer": "hospital-idp",
+    "next_update_ms": 8000,
+    "revoked_subject_hashes": [],
+    "schema_version": "edge-lifeline-revocation-snapshot-v1",
+    "snapshot_id": "snapshot-17",
+    "source_artifact_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "edge-lifeline-phase5-config-v1",
+  "phase": 5,
+  "title": "Deterministic identity, bounded time, and pinned policy",
+  "opa": {
+    "version": "1.19.1",
+    "entrypoint": "edge_lifeline/phase5/result",
+    "allowed_transports": [
+      "loopback_http",
+      "unix_domain_socket"
+    ]
+  },
+  "identity": {
+    "offline_claim": "last_authenticated_snapshot_only",
+    "revocations_after_snapshot": "unknowable_during_partition"
+  },
+  "time": {
+    "authority_source": "authenticated_anchor_plus_boottime",
+    "wall_clock": "diagnostic_only",
+    "unsafe_restart_mode": "PROTECTIVE_READ_ONLY"
+  },
+  "scientific_boundary": "Synthetic nonclinical mechanism validation only; Phase 6 reconciliation remains locked."
+}

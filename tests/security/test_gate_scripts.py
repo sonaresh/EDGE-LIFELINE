@@ -120,3 +120,34 @@ def test_phase4_gate_is_conditional_and_preserves_mvsg_evidence() -> None:
     assert "run_phase4_gate.ps1" in gate["run"]
     assert upload["if"] == "always()"
     assert upload["with"]["path"] == "evidence/phase4/generated/"
+
+
+@pytest.mark.security
+def test_phase5_gate_is_conditional_and_preserves_identity_time_policy_evidence() -> None:
+    script = Path("scripts/run_phase5_gate.ps1").read_text(encoding="utf-8")
+    assert "phase4-external-acceptance.json" in script
+    assert "install-opa.ps1" in script
+    assert "--fail-on-empty" in script
+    assert "generate_phase5_fixtures" in script
+    assert "phase5-negative-tests-junit.xml" in script
+    assert "external_review_required = $true" in script
+    assert "phase5_complete = $false" in script
+    assert "phase6_authorized = $false" in script
+    assert "PIPAPI_PYTHON_LOCATION" in script
+    workflow = yaml.safe_load(Path(".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    steps = workflow["jobs"]["identity-time-policy"]["steps"]
+    gate = next(step for step in steps if step.get("name") == "Run Phase 5 gate")
+    upload = next(step for step in steps if step.get("name") == "Upload Phase 5 evidence")
+    assert "run_phase5_gate.ps1" in gate["run"]
+    assert upload["if"] == "always()"
+    assert upload["with"]["path"] == "evidence/phase5/generated/"
+
+
+@pytest.mark.security
+def test_opa_installer_is_version_pinned_and_checks_official_sha256() -> None:
+    script = Path("scripts/install-opa.ps1").read_text(encoding="utf-8")
+    assert "$Version = '1.19.1'" in script
+    assert "https://openpolicyagent.org/downloads/v$Version/$Asset" in script
+    assert '"$BaseUrl.sha256"' in script
+    assert "Get-FileHash" in script
+    assert "$ActualHash -ne $ExpectedHash" in script
