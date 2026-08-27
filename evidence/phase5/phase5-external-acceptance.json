@@ -1,0 +1,32 @@
+{
+  "schema_version": "phase5-external-acceptance-v1",
+  "recorded_at_utc": "2026-08-27T23:30:00Z",
+  "decision": "PASS",
+  "phase5_complete": true,
+  "phase6_authorized": true,
+  "accepted_source_commit": "150bf42abd864cb793a2c1de5eb8110b36034162",
+  "source_archive_sha256": "473a523f4e9b2dcbf625cf82634f1dbf69966c6e33290bf6bbc6a33b084f3d89",
+  "local_archive_sha256": "a794803084015e3042f746ee5820e08d1a54f8c0972048fea923b29924aa7bb3",
+  "ci_archive_sha256": "d42ebbc87a13845004658b5ca1d71465f3741ab88d4285790a06b1b696b39af7",
+  "github_actions_run_url": "https://github.com/sonaresh/EDGE-LIFELINE/actions/runs/33125750645",
+  "source_manifest_entries": 144,
+  "source_manifests_exact_match": true,
+  "evidence_manifest_entries_per_environment": 21,
+  "evidence_manifest_mismatches": 0,
+  "tests_per_environment": 284,
+  "security_tests_per_environment": 139,
+  "phase5_negative_tests_per_environment": 26,
+  "opa_tests_per_environment": 7,
+  "opa_version": "1.19.1",
+  "line_coverage_percent": 94.36,
+  "branch_coverage_percent": 85.41,
+  "deterministic_fixtures_exact_match": true,
+  "sbom_components_per_environment": 93,
+  "known_dependency_vulnerabilities": 0,
+  "platform_dependency_difference": {
+    "windows_only": "colorama==0.4.6",
+    "linux_only": "uvloop==0.22.1",
+    "assessment": "EXPECTED_PLATFORM_MARKER_DIFFERENCE"
+  },
+  "scientific_boundary": "Phase 5 validates bounded cached identity, authenticated bounded-time estimation, and pinned local policy enforcement using synthetic nonclinical evidence. It does not claim current offline revocation state, hardware-root assurance, clinical safety, or causal reconciliation."
+}
