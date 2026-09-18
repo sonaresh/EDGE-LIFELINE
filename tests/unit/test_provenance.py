@@ -33,18 +33,41 @@ def test_manifest_rejects_path_escape(tmp_path: Path) -> None:
         build_manifest(tmp_path, ["../outside.txt"])
 
 
-def test_source_discovery_excludes_generated_and_virtual_environment(tmp_path: Path) -> None:
+def test_source_discovery_excludes_generated_and_virtual_environment(
+    tmp_path: Path,
+) -> None:
     (tmp_path / "src").mkdir()
     (tmp_path / "src" / "app.py").write_text("source", encoding="utf-8")
+
     (tmp_path / ".venv").mkdir()
-    (tmp_path / ".venv" / "package.py").write_text("ignored", encoding="utf-8")
-    generated = tmp_path / "evidence" / "phase1" / "generated" / "run"
-    generated.mkdir(parents=True)
-    (generated / "report.json").write_text("{}", encoding="utf-8")
+    (tmp_path / ".venv" / "package.py").write_text(
+        "ignored",
+        encoding="utf-8",
+    )
+
+    generated_phase1 = tmp_path / "evidence" / "phase1" / "generated" / "run"
+    generated_phase1.mkdir(parents=True)
+    (generated_phase1 / "report.json").write_text(
+        "{}",
+        encoding="utf-8",
+    )
+
     generated_phase2 = tmp_path / "evidence" / "phase2" / "generated" / "run"
     generated_phase2.mkdir(parents=True)
-    (generated_phase2 / "report.json").write_text("{}", encoding="utf-8")
+    (generated_phase2 / "report.json").write_text(
+        "{}",
+        encoding="utf-8",
+    )
+
+    generated_phase6 = tmp_path / "evidence" / "phase6" / "generated" / "run"
+    generated_phase6.mkdir(parents=True)
+    (generated_phase6 / "phase6-gate.log").write_text(
+        "generated",
+        encoding="utf-8",
+    )
+
     (tmp_path / "archive.zip").write_bytes(b"not-source")
+
     assert discover_source_files(tmp_path) == ["src/app.py"]
 
 
