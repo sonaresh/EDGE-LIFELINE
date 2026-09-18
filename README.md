@@ -3,12 +3,12 @@
 Proof-Carrying Degraded Autonomy and Causal Recovery for Mission-Critical
 Cloud-Edge Systems.
 
-Release **v0.7.0** is the Phase 7 candidate. It adds a reproducible four-cluster local
-k3d/K3s topology, restricted workloads, deterministic faults, observation, recovery, and cleanup.
+Release **v0.8.0** is the Phase 8 candidate. It adds the preregistered paired-factorial
+synthetic evaluation, independent oracle, deterministic statistical analysis, and H4 benchmark.
 
-Phase 6 was independently accepted and recorded at commit
-`5034fb07f9d1f962b01a5246af2364695b8d7530`. Phase 7 is not complete until its own local and
-CI evidence are independently reviewed. Phase 8 is not authorized by an automated gate.
+Phase 7 was independently accepted and recorded at commit
+`7a4e99bac496b66943c7cb573f3ec07cf50541db`. Phase 8 is not complete until its own local and
+CI evidence are independently reviewed. Phase 9 packaging is not authorized by an automated gate.
 
 The hospital emergency-continuity case study is a synthetic systems-resilience
 experiment. This is not a clinically validated medical system and must not be used
@@ -29,12 +29,12 @@ Connectivity restoration and signed receipts do not restore authority; a fresh c
 lease is mandatory.
 
 The candidate does **not** prove application correctness, sensor truth, clinical
-safety, hardware key protection, unbounded protocol correctness, orchestration realism, or H5/H6.
+safety, hardware key protection, unbounded protocol correctness, or production reliability.
 The TLA+ model treats cryptography ideally; byte-level cryptographic evidence and
 model-checking evidence are deliberately kept separate.
 
-See [the Phase 7 specification](docs/phase7/README.md) and
-[its limitations](docs/phase7/limitations.md).
+See [the Phase 8 protocol](docs/phase8/README.md) and
+[its limitations](docs/phase8/limitations.md).
 
 ## Required local environment
 
@@ -64,19 +64,19 @@ Get-ChildItem .\scripts -Recurse -File -Filter *.ps1 | Unblock-File
 .\scripts\bootstrap.ps1
 ```
 
-## Run the Phase 7 gate
+## Run the Phase 8 gate
 
 ```powershell
-.\scripts\run_phase7_gate.ps1
+.\scripts\run_phase8_gate.ps1
 ```
 
 The gate performs frozen dependency installation; formatting, lint, strict typing,
 branch-aware coverage, security-negative tests, byte-for-byte event/recovery vector regeneration,
 provenance capture, SBOM generation, and dependency auditing.
 
-Evidence is written to `evidence/phase7/generated/<UTC timestamp>/`. A successful
-automated run intentionally records `CONDITIONAL_PASS`, `phase7_complete: false`, and
-`phase8_authorized: false` until independent review compares local and CI archives.
+Evidence is written to `evidence/phase8/generated/<UTC timestamp>/`. A successful
+automated run intentionally records `CONDITIONAL_PASS`, `phase8_complete: false`, and
+`phase9_authorized: false` until independent review compares local and CI archives.
 
 ## Preserve the local Phase 7 evidence archive
 

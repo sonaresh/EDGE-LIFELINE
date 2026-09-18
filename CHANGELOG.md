@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.8.0 - 2026-09-18
+
+- Add a frozen paired-factorial experiment across eight methods, E1-E20, and ten seeds.
+- Add an independent declarative action oracle and exact trace pairing across methods.
+- Add preregistered H1-H3 and H5-H9 comparisons with deterministic bootstrap intervals,
+  paired sign-flip tests, Holm correction, and explicit non-increasing-invariant guards.
+- Add host-specific H4 proof-verification and consequential-admission proxy measurements.
+- Preserve all outcomes with no outcome-based exclusions and make hypothesis favorability
+  independent of gate success.
+- Add deterministic double execution, frozen digests, scientific-integrity tests, and a Phase 8
+  evidence gate while keeping Phase 9 packaging locked.
+
 ## 0.7.0 - 2026-09-18
 
 - Add a pinned four-cluster k3d/K3s research topology with one cloud and three edge clusters.

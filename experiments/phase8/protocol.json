@@ -1,0 +1,43 @@
+{
+  "schema_version": "edge-lifeline-phase8-protocol-v1",
+  "stage": "final",
+  "synthetic_nonclinical": true,
+  "analysis_frozen_before_final_run": true,
+  "factorial_core": ["method", "scenario", "seed"],
+  "methods": ["B0", "B1", "B2", "B3", "B4", "B5", "B6", "EL"],
+  "scenarios": ["E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "E13", "E14", "E15", "E16", "E17", "E18", "E19", "E20"],
+  "seeds": [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009],
+  "events_per_cell": 64,
+  "paired_block": "scenario-and-seed",
+  "run_order": "canonical for byte reproducibility; paired traces are identical across methods",
+  "pilot": {
+    "seeds": [900, 901, 902, 903, 904, 905, 906, 907, 908, 909],
+    "used_for_threshold_tuning": false,
+    "outcomes_excluded_from_final_analysis": true
+  },
+  "power_decision": {
+    "independent_seeds_per_method_scenario_cell": 10,
+    "basis": "Phase 0 planning floor retained after feasibility pilot; report confidence intervals and sensitivity, not post-hoc power.",
+    "increase_rule": "Increase before unblinding only if pilot exposes degenerate variance or infrastructure instability."
+  },
+  "primary_hypotheses": ["H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9"],
+  "multiplicity_control": "Holm across preregistered H1-H3 and H5-H9 comparisons",
+  "continuous_test": "paired sign-flip permutation with deterministic bootstrap confidence interval",
+  "primary_comparisons": [
+    {"hypothesis": "H1", "baseline": "B0", "metric": "critical_availability", "direction": "greater", "scenarios": ["E2", "E3", "E4", "E5", "E12", "E15"]},
+    {"hypothesis": "H2", "baseline": "B1", "metric": "unsafe_actions_executed", "direction": "less", "scenarios": ["E7", "E8", "E13", "E15", "E16", "E17", "E18", "E19", "E20"]},
+    {"hypothesis": "H3", "baseline": "B0", "metric": "false_denials", "direction": "less", "scenarios": ["E2", "E3", "E4", "E5", "E12", "E15"], "safety_guard": "mean invariant violations must not increase"},
+    {"hypothesis": "H5", "baseline": "B6", "metric": "utility_per_resource", "direction": "greater", "scenarios": ["E10"]},
+    {"hypothesis": "H6", "baseline": "B5", "metric": "incorrect_conflict_resolutions", "direction": "less", "scenarios": ["E11", "E14", "E20"]},
+    {"hypothesis": "H7", "baseline": "B3", "metric": "invariant_violations", "direction": "less", "scenarios": ["E12", "E16"]},
+    {"hypothesis": "H8", "baseline": "B1", "metric": "unsafe_actions_executed", "direction": "less", "scenarios": ["E8", "E13", "E15"]},
+    {"hypothesis": "H9", "baseline": "B2", "metric": "invariant_violations", "direction": "less", "scenarios": ["E13", "E17", "E19", "E20"]}
+  ],
+  "performance_targets": {
+    "consequential_admission_p99_ms": 50.0,
+    "standalone_proof_verification_p99_ms": 10.0
+  },
+  "exclusion_policy": "No outcome-based exclusions. Infrastructure failures remain recorded and are classified before rerun.",
+  "acceptance_policy": "The Phase 8 gate requires protocol integrity, complete execution, deterministic reproduction, and honest reporting. It does not require hypotheses to be favorable.",
+  "scientific_boundary": "Accelerated synthetic hospital-resilience simulation and host-specific engineering measurements only; no clinical efficacy, patient-safety, production-scale, hardware-root, or universal causal claim."
+}

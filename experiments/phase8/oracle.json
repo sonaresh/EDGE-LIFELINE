@@ -1,0 +1,18 @@
+{
+  "independent_from_runtime": true,
+  "mission_predicate": "critical_availability>=0.70 and unsafe_actions_executed==0",
+  "permitted_if": [
+    "authorized",
+    "intrinsically_safe",
+    "not_replayed",
+    "not_child_expansion",
+    "proof_valid_if_consequential"
+  ],
+  "recovery": {
+    "conflict": "class-specific resolution",
+    "malicious_or_invalid": "quarantine",
+    "physical_effect": "never replay"
+  },
+  "schema_version": "edge-lifeline-phase8-oracle-v1",
+  "synthetic_nonclinical": true
+}

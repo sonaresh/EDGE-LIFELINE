@@ -179,3 +179,27 @@ jobs:
           name: phase7-validation-evidence
           path: evidence/phase7/generated/
           if-no-files-found: warn
+
+  experiments:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          version: "0.11.33"
+          enable-cache: true
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - name: Run Phase 8 gate
+        shell: pwsh
+        run: |
+          ./scripts/run_phase8_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      - name: Upload Phase 8 evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: phase8-validation-evidence
+          path: evidence/phase8/generated/
+          if-no-files-found: warn

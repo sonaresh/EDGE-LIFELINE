@@ -1,0 +1,13 @@
+{
+  "analysis_sha256": "f86caf7de464c93e89e12df6cbb449a73020675b2174c5dd582d6bf0065f5b35",
+  "excluded_runs": 0,
+  "method_count": 8,
+  "oracle_sha256": "8ef5a994bff10e1856e277d33f0541277c3382b513c8c424e0eb042a11afc2f3",
+  "protocol_sha256": "69b4367aca9822d802773e8b30daa11144d654e926c0e7cd2dd5a023e620dd6e",
+  "raw_results_sha256": "c6437f17ac3371d022da83a1cca535c48c02f2aa58514e14b4b5196e3660b49d",
+  "run_count": 1600,
+  "scenario_count": 20,
+  "schema_version": "edge-lifeline-phase8-digest-vector-v1",
+  "seed_count": 10,
+  "trace_count": 200
+}

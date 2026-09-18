@@ -50,6 +50,9 @@ def test_source_discovery_excludes_generated_and_virtual_environment(tmp_path: P
     generated_phase7 = tmp_path / "evidence" / "phase7" / "generated" / "run"
     generated_phase7.mkdir(parents=True)
     (generated_phase7 / "phase7-gate.log").write_text("generated", encoding="utf-8")
+    generated_phase8 = tmp_path / "evidence" / "phase8" / "generated" / "run"
+    generated_phase8.mkdir(parents=True)
+    (generated_phase8 / "phase8-gate.log").write_text("generated", encoding="utf-8")
     (tmp_path / "archive.zip").write_bytes(b"not-source")
     assert discover_source_files(tmp_path) == ["src/app.py"]
 

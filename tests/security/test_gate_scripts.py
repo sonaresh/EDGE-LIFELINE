@@ -183,6 +183,28 @@ def test_phase7_gate_is_conditional_and_preserves_orchestration_evidence() -> No
 
 
 @pytest.mark.security
+def test_phase8_gate_is_conditional_and_preserves_experiment_evidence() -> None:
+    script = Path("scripts/run_phase8_gate.ps1").read_text(encoding="utf-8")
+    assert "phase7-external-acceptance.json" in script
+    assert "run_phase8_experiments" in script
+    assert "generate_phase8_vector" in script
+    assert "phase8-negative-tests-junit.xml" in script
+    assert "hypothesis_favorability_required_for_gate = $false" in script
+    assert "external_review_required = $true" in script
+    assert "phase8_complete = $false" in script
+    assert "phase9_authorized = $false" in script
+    assert "PIPAPI_PYTHON_LOCATION" in script
+    workflow = yaml.safe_load(Path(".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    steps = workflow["jobs"]["experiments"]["steps"]
+    gate = next(step for step in steps if step.get("name") == "Run Phase 8 gate")
+    upload = next(step for step in steps if step.get("name") == "Upload Phase 8 evidence")
+    assert "run_phase8_gate.ps1" in gate["run"]
+    assert upload["if"] == "always()"
+    assert upload["with"]["name"] == "phase8-validation-evidence"
+    assert upload["with"]["path"] == "evidence/phase8/generated/"
+
+
+@pytest.mark.security
 def test_opa_installer_is_version_pinned_and_checks_official_sha256() -> None:
     script = Path("scripts/install-opa.ps1").read_text(encoding="utf-8")
     assert "$Version = '1.19.1'" in script
