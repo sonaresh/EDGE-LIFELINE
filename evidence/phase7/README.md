@@ -1,4 +1,7 @@
 # Phase 7 evidence
 
 Generated evidence is written under `generated/` and excluded from source manifests.
-External review must compare the Windows and CI archives before Phase 8 is authorized.
+A newly generated evidence set must receive Windows/CI comparison before it can support a new
+acceptance decision.
+
+The comparison was completed and recorded in `phase7-external-acceptance.json`.

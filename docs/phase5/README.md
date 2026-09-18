@@ -36,5 +36,6 @@ Rego tests, byte-for-byte frozen fixture regeneration, provenance, CycloneDX SBO
 and dependency auditing. The first run downloads OPA from the official project URL and checks
 the binary against the adjacent official SHA-256 file before execution.
 
-The automated result remains `CONDITIONAL_PASS`; external comparison of the Windows and CI
-evidence archives is required before Phase 5 completes or Phase 6 is authorized.
+The automated result remains `CONDITIONAL_PASS` by design. Independent Windows/CI review recorded
+Phase 5 `PASS` at source commit `150bf42abd864cb793a2c1de5eb8110b36034162` and authorized
+Phase 6. Rerunning the gate does not replace that external decision.

@@ -12,5 +12,5 @@
 | P5-INT-01 | Admission composes time, identity, and policy without bypass; earlier failure short-circuits later evaluation. | `tests/integration/test_phase5_admission.py` |
 | P5-REP-01 | Frozen fixtures regenerate byte-for-byte and local/CI evidence is manifest-bound to one commit. | `tests/security/phase5/test_frozen_fixtures.py`, source/evidence manifests, provenance |
 
-Automated results remain conditional. Only external comparison of local Windows and GitHub
-Actions evidence from the same commit can set `phase5_complete` and authorize Phase 6.
+Automated results remain conditional. The required external comparison was completed, and the
+accepted decision is recorded in `evidence/phase5/phase5-external-acceptance.json`.

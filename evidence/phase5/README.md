@@ -8,3 +8,6 @@ OPA version and test results, deterministic identity fixtures, boot-aware time t
 semantic policy manifest, source and evidence manifests, provenance, limitations, SBOM, and
 dependency audit. External review must compare local Windows and GitHub Actions archives from
 the same clean source commit before changing the conditional decision.
+
+The completed review and immutable archive hashes are recorded in
+`phase5-external-acceptance.json`.

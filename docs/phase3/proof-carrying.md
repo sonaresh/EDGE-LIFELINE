@@ -2,7 +2,7 @@
 
 ## Status and scientific boundary
 
-This candidate implements a machine-verifiable authorization artifact, not a renamed
+The accepted Phase 3 implementation provides a machine-verifiable authorization artifact, not a renamed
 log record. A proof consists of signed claims plus the complete hash-linked parent
 authority chain, locally supplied evidence bytes, current verification context, and
 durable admission state. Verification establishes that the configured issuer
@@ -23,8 +23,10 @@ faithfully executes the admitted action.
 - the effect adapter could dispatch before the certificate transaction committed; or
 - cryptographic tests were presented as proof of the TLA+ model, or vice versa.
 
-The implementation and negative tests directly guard these conditions. Deployment
-claims remain pending independent Phase 3 evidence review.
+The implementation and negative tests directly guard these conditions. Independent review
+recorded Phase 3 `PASS` at source commit
+`965e5aa7dd47ba293b3e25ac6ad388c8e2c51275`. That acceptance validates the synthetic,
+nonclinical mechanism and does not create a deployment-safety claim.
 
 ## Normative artifact profile
 
@@ -118,15 +120,15 @@ Expected files under `evidence/phase3/generated/<timestamp>/` are:
   `dependency-audit.json`
 - `gate-decision.json` and `evidence-manifest.json`
 
-## Known limitations and next phases
+## Known limitations and completed follow-on phases
 
 | Limitation | Consequence | Mitigation or later phase |
 |---|---|---|
-| Software-managed keys | Host compromise may expose signing keys | Hardware-backed key experiments in Phase 7/8 |
+| Software-managed keys | Host compromise may expose signing keys | Hardware-root assurance remains outside v0.9.0 |
 | SQLite on one volume | No Byzantine or cross-node transaction guarantee | Keep one authoritative admission store per edge; evaluate storage faults |
-| SHA-256 evidence references | Hash proves byte identity, not truth or provenance quality | Signed attestations and provenance policies in Phase 5 |
-| In-process issuer/verifier core | HTTP/mTLS boundary is not evaluated here | Service deployment and network isolation in Phase 7 |
+| SHA-256 evidence references | Hash proves byte identity, not truth or provenance quality | Phase 5 added bounded identity/time/policy evidence; sensor truth remains outside scope |
+| In-process issuer/verifier core | HTTP/mTLS boundary is not evaluated here | Phase 7 separately validated local orchestration and network restrictions |
 | Synthetic policy and case study | No clinical safety or efficacy claim | Maintain nonclinical label; expert/clinical validation is outside scope |
-| Performance samples are host-specific | No general latency claim | Repeated seeded experiments and confidence intervals in Phase 8 |
-| No MVSG optimizer yet | Mission-minimal graph is not selected | Phase 4 |
-| No causal reconciliation engine yet | Recovery artifacts are not implemented | Phase 6 |
+| Performance samples are host-specific | No general latency claim | Phase 8 reports separate host-specific measurements and bounded inference |
+| MVSG is outside Phase 3 | Phase 3 alone does not select a mission-minimal graph | Implemented and separately accepted in Phase 4 |
+| Causal reconciliation is outside Phase 3 | Phase 3 alone does not create recovery artifacts | Implemented and separately accepted in Phase 6 |

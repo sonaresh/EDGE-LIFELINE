@@ -10,3 +10,11 @@ and analysis hashes.
 
 Run `scripts/run_phase9_gate.ps1` after committing. Automated success remains conditional until
 the Windows and GitHub evidence archives are independently compared.
+
+That comparison is complete. Phase 9 received `PASS` at implementation commit
+`d17ba0956d73cc301a4ded939293966843ea8af9`; external acceptance was recorded at commit
+`0ca92e3a7d2bc870033d7eaeaff80ac3b13de354`, and the public release is tagged `v0.9.0`.
+
+The accepted review verified 392 complete tests, 159 security tests, 238 matching source entries,
+33 evidence entries per environment, byte-identical publication artifacts, 94.77% line coverage,
+85.61% branch coverage, and zero known dependency vulnerabilities.

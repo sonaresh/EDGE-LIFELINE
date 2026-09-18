@@ -1,6 +1,8 @@
 # Phase 1 evidence
 
-Generated gate evidence is stored in timestamped directories and intentionally excluded from source control until reviewed and accepted.
+Generated gate evidence is stored in timestamped directories and intentionally excluded from
+source control. Phase 1 was independently accepted; the durable decision is
+`phase1-external-acceptance.json`.
 
 Required accepted evidence:
 
@@ -14,4 +16,5 @@ Required accepted evidence:
 - CI run URL or exported logs
 - Docker Compose rendered configuration, health responses, service/image inventory, and resolved base-image details
 
-The current environment may validate the code gate without Docker, but Phase 1 cannot receive an unconditional pass until the four-service Compose smoke test and CI evidence have both been independently reviewed.
+The four-service Compose smoke test and CI evidence were independently reviewed before the Phase 1
+`PASS` was recorded. A new gate run remains conditional until separately reviewed.

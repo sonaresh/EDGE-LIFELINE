@@ -8,8 +8,8 @@ mandatory mission capabilities under current authority, freshness, locality, res
 ordering, exclusion, and redundancy constraints.
 
 The optimizer does not invent mission priorities, diagnose patients, control medical equipment,
-or establish hypothesis H5. Phase 8 will compare mission utility per declared energy/compute unit
-against the frozen B6 static-priority baseline using repeated paired experiments.
+or by itself establish hypothesis H5. Phase 8 subsequently compared mission utility per declared
+energy/compute unit against the frozen B6 static-priority baseline using repeated paired experiments.
 
 ## Constraint model
 
@@ -66,6 +66,8 @@ dependency audit; source manifest; evidence manifest; and matching local/CI arch
 clean source commit.
 
 Automated success remains `CONDITIONAL_PASS`; it cannot complete Phase 4 or authorize Phase 5.
+Independent review recorded Phase 4 `PASS` at source commit
+`6fb314effdc5e45145593bbdd582e19f60914d5f`.
 
 ## Known limitations
 
@@ -75,5 +77,5 @@ Automated success remains `CONDITIONAL_PASS`; it cannot complete Phase 4 or auth
 - The hospital graph is an engineering fixture, not a clinical model.
 - Validator compromise, incorrect declared mission priorities, and false sensor evidence remain
   outside this mechanism's guarantee.
-- Phase 4 does not implement Phase 5 identity/time/policy distribution, Phase 6 causal recovery,
-  Phase 7 orchestration realism, or Phase 8 manuscript experiments.
+- Phase 4 evidence alone does not establish the identity/time/policy, causal recovery,
+  orchestration, or experimental claims that were implemented and reviewed in later phases.

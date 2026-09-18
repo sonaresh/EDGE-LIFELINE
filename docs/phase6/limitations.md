@@ -5,5 +5,5 @@
 - Local hash chains detect alteration only relative to retained or externally witnessed material.
 - Compensation is proposed as a new event; Phase 6 does not execute domain-specific compensation.
 - Human-review decisions are queued but no operational reviewer workflow is claimed.
-- Phase 6 does not run the multi-cluster orchestration, fault campaigns, baselines, or statistical
-  experiments reserved for Phases 7 and 8.
+- Phase 6 evidence does not establish multi-cluster orchestration or comparative experimental
+  outcomes. Those claims were evaluated separately in the accepted Phase 7 and Phase 8 evidence.

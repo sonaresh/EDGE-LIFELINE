@@ -19,5 +19,6 @@ Run:
 .\scripts\run_phase8_gate.ps1
 ```
 
-Successful automated evidence remains `CONDITIONAL_PASS`. Independent local-versus-CI review is
-required before Phase 8 can be complete or Phase 9 packaging can be authorized.
+Successful automated evidence remains `CONDITIONAL_PASS` by design. Independent local-versus-CI
+review recorded Phase 8 `PASS` at source commit
+`c376cb5bd6fee1c63805c416b9b17f22cfa48066` and authorized Phase 9 packaging.

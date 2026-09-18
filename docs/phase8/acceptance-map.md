@@ -14,5 +14,6 @@
 | Supply-chain inventory | CycloneDX SBOM and dependency audit |
 | Scientific boundary | `limitations.md` |
 
-The gate result is conditional. External review must match local and CI manifests, source hashes,
-raw results, analysis, protocol, oracle, benchmark interpretation, and acceptance linkage.
+The gate result is conditional. The required external review matched the local and CI manifests,
+source hashes, raw results, analysis, protocol, oracle, benchmark interpretation, and acceptance
+linkage. The final record is `evidence/phase8/phase8-external-acceptance.json`.

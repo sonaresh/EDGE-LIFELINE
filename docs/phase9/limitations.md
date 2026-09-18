@@ -6,4 +6,5 @@
 - E9 full-TCB compromise remains detection-only; prevention is not claimed.
 - Signatures establish origin and integrity, not sensor truth or correct real-world outcomes.
 - No production reliability, patient-safety, hardware-root, or universal causal claim is made.
-- Automated gate success does not authorize public release without independent review.
+- Automated gate success alone does not authorize public release. The required independent review
+  is complete and authorizes v0.9.0 only within every limitation listed above.

@@ -12,8 +12,8 @@
   supervisor, mutual process identity, and operating-system confinement remain outside this
   prototype.
 - Policy WASM is deferred. Phase 5 validates the pinned OPA/Rego sidecar profile only.
-- Phase 5 does not implement causal ledgers, reconciliation, automatic merge, compensation, or
-  causal recovery. Those capabilities belong to Phase 6 and remain locked.
+- Phase 5 evidence does not establish causal-ledger or reconciliation behavior. Those capabilities
+  were implemented and independently reviewed under the separate Phase 6 boundary.
 - The official OPA checksum is retrieved over HTTPS from the OPA distribution endpoint and
   verified before execution. A future release process may additionally vendor the checksum in
   a signed, independently witnessed release manifest.

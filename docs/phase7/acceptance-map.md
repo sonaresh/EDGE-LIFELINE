@@ -12,4 +12,5 @@
 | Cleanup removes all created clusters | `cleanup.json` |
 | Reproducible source and evidence | manifests, provenance, CI artifact |
 
-Independent Windows/CI comparison is required before Phase 8 is authorized.
+The required Windows/CI comparison was completed and recorded in
+`evidence/phase7/phase7-external-acceptance.json`, authorizing the now-completed Phase 8 work.

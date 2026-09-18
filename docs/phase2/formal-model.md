@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-This candidate implements the Phase 0 authority and transition semantics in two
+The accepted Phase 2 implementation expresses the Phase 0 authority and transition semantics in two
 separate forms:
 
 1. a typed executable Python model used for runtime/property tests; and
@@ -94,7 +94,10 @@ Phase 2 passes independent review only if all of the following hold:
   present; and
 - an external review records the acceptance decision.
 
-The automated gate must remain conditional. It cannot self-authorize Phase 3.
+The automated gate remains conditional by design and cannot self-authorize Phase 3. Independent
+review recorded Phase 2 `PASS` at source commit
+`53b3065ac6a32ff09d9e286652661f8f4ee6986a`; the later authorization is historical evidence,
+not an output of a gate rerun.
 
 ## Expected outputs
 
@@ -124,8 +127,8 @@ No experimental performance or safety outcome is pre-filled by this phase.
 | Synthetic policy thresholds | No clinical validity | Label nonclinical and run sensitivity analysis later |
 | In-memory nonce model | Restart persistence is not proven | Phase 3 durable atomic verifier state |
 | Simplified energy/resource units | Not hardware-calibrated | Calibrate in Phases 7–8 |
-| No MVSG optimizer yet | Mission graph feasibility is not evaluated | Phase 4 |
-| No causal reconciliation engine yet | Recovery safety is only state-level | Phase 6 |
+| MVSG is outside Phase 2 | Mission graph feasibility is not established by this model | Implemented and separately accepted in Phase 4 |
+| Causal reconciliation is outside Phase 2 | Recovery safety is only state-level here | Implemented and separately accepted in Phase 6 |
 
 ## Rollback
 

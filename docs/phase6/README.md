@@ -7,3 +7,6 @@ Authenticated reconnection enters reconciliation pending. It never restores auth
 accepted receipt requires a fresh connected-epoch lease before connected authority can be granted.
 
 See `causal-recovery.md`, `limitations.md`, and `acceptance-map.md` for the normative boundary.
+
+Independent review recorded Phase 6 `PASS` at source commit
+`4abad6c4f4886e023d05f91d30e6d2b71c62ac64`.

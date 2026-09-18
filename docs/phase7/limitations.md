@@ -5,4 +5,5 @@
 - No AWS, EKS, hardware root of trust, physical edge device, or WAN impairment is evaluated.
 - Kubernetes readiness does not establish identity, policy, time, lease, or effect authority.
 - Reconnection never restores authority; a fresh connected-epoch lease is still required.
-- Phase 8 experiments, baselines, power analysis, performance outcomes, and statistical claims remain locked.
+- Phase 7 evidence does not establish comparative outcomes. Those outcomes were evaluated
+  separately under the accepted, preregistered Phase 8 protocol.

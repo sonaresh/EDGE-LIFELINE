@@ -2,12 +2,16 @@
 
 ## 0.9.0 - 2026-09-18
 
+- Complete independent Windows/Linux review and authorize the final public research release.
+- Record 392 passing tests, 159 security tests, 94.77% line coverage, 85.61% branch coverage,
+  238 matching source entries, and zero known dependency vulnerabilities.
 - Add deterministic publication and reproducibility packaging from the externally accepted Phase 8 record.
 - Generate manuscript-ready results, CSV tables, an SVG effect figure, claim-evidence mapping,
   reproduction instructions, release metadata, checksums, and an archival manifest.
 - Fail closed on accepted commit, protocol, oracle, raw-result, analysis, or E9 boundary mismatch.
 - Preserve all accepted outcomes without rerunning experiments or introducing post-hoc exclusions.
-- Add Phase 9 security tests and a conditional final-release evidence gate.
+- Add Phase 9 security tests and a conditional automated evidence gate, followed by a separately
+  recorded external `PASS` decision.
 
 ## 0.8.0 - 2026-09-18
 

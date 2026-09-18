@@ -11,5 +11,6 @@
 | Signed receipt and witnessed checkpoint | Recovery round-trip tests and frozen vector |
 | Deterministic outputs | Byte-for-byte vector regeneration |
 
-The automated gate reports `CONDITIONAL_PASS`. Independent review of matching local and CI
-evidence is required before Phase 6 completes or Phase 7 is authorized.
+The automated gate reports `CONDITIONAL_PASS` by design. Independent review of matching local
+and CI evidence recorded Phase 6 `PASS`; see
+`evidence/phase6/phase6-external-acceptance.json`.
