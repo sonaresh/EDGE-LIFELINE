@@ -144,6 +144,25 @@ def test_phase5_gate_is_conditional_and_preserves_identity_time_policy_evidence(
 
 
 @pytest.mark.security
+def test_phase6_gate_is_conditional_and_preserves_causal_recovery_evidence() -> None:
+    script = Path("scripts/run_phase6_gate.ps1").read_text(encoding="utf-8")
+    assert "phase5-external-acceptance.json" in script
+    assert "generate_phase6_vectors" in script
+    assert "phase6-negative-tests-junit.xml" in script
+    assert "external_review_required = $true" in script
+    assert "phase6_complete = $false" in script
+    assert "phase7_authorized = $false" in script
+    assert "PIPAPI_PYTHON_LOCATION" in script
+    workflow = yaml.safe_load(Path(".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    steps = workflow["jobs"]["causal-recovery"]["steps"]
+    gate = next(step for step in steps if step.get("name") == "Run Phase 6 gate")
+    upload = next(step for step in steps if step.get("name") == "Upload Phase 6 evidence")
+    assert "run_phase6_gate.ps1" in gate["run"]
+    assert upload["if"] == "always()"
+    assert upload["with"]["path"] == "evidence/phase6/generated/"
+
+
+@pytest.mark.security
 def test_opa_installer_is_version_pinned_and_checks_official_sha256() -> None:
     script = Path("scripts/install-opa.ps1").read_text(encoding="utf-8")
     assert "$Version = '1.19.1'" in script

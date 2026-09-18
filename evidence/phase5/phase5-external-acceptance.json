@@ -23,10 +23,5 @@
   "deterministic_fixtures_exact_match": true,
   "sbom_components_per_environment": 93,
   "known_dependency_vulnerabilities": 0,
-  "platform_dependency_difference": {
-    "windows_only": "colorama==0.4.6",
-    "linux_only": "uvloop==0.22.1",
-    "assessment": "EXPECTED_PLATFORM_MARKER_DIFFERENCE"
-  },
   "scientific_boundary": "Phase 5 validates bounded cached identity, authenticated bounded-time estimation, and pinned local policy enforcement using synthetic nonclinical evidence. It does not claim current offline revocation state, hardware-root assurance, clinical safety, or causal reconciliation."
 }

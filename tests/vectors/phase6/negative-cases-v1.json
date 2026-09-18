@@ -1,0 +1,13 @@
+{
+  "authority_restored": false,
+  "cases": {
+    "effect_replay": "DEDUPLICATE_EFFECT_NO_REPLAY",
+    "false_class": "QUARANTINE:REGISTERED_CLASS_MISMATCH",
+    "fork": "QUARANTINE:EDGE_HISTORY_FORK",
+    "invalid_signature": "QUARANTINE:INVALID_EVENT",
+    "missing_parent": "QUARANTINE:CAUSAL_PARENT_MISSING",
+    "reconnect": "RECONCILIATION_PENDING_AND_FRESH_LEASE_REQUIRED"
+  },
+  "effect_replay_count": 0,
+  "schema_version": "edge-lifeline-phase6-negative-cases-v1"
+}

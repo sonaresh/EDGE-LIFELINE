@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.6.0 - 2026-08-27
+
+- Add canonical COSE/Ed25519 causal events with proof, lease, epoch, parent, vector-clock,
+  idempotency, pre/postcondition, payload, and safety-class bindings.
+- Add deterministic DAG validation for missing parents, gaps, forks, causal cycles, epoch
+  mismatches, invalid proofs, false safety classes, and quarantined descendants.
+- Add append-only SQLite event, irreversible-effect, quarantine, checkpoint, and receipt storage.
+- Implement S0–S4 class-specific reconciliation; S5 inputs are quarantined before state mutation.
+- Require compensation as a new event, human review for concurrent authoritative conflicts, and
+  exactly-once preservation without re-dispatch for irreversible effects.
+- Add signed reconciliation receipts and witnessed checkpoints that cannot restore authority and
+  always require a fresh connected-epoch lease.
+- Add deterministic event/recovery vectors, security-negative tests, and the Phase 6 evidence gate.
+
 ## 0.5.0 - 2026-08-27
 
 - Add fail-safe cached pseudonymous identity evaluation with explicit assurance, role,

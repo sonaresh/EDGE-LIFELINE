@@ -17,6 +17,8 @@ COSE_SIGN1_TAG = 18
 HEADER_ALGORITHM = 1
 HEADER_KEY_ID = 4
 EDDSA = -8
+SigningPrivateKey = Ed25519PrivateKey
+SigningPublicKey = Ed25519PublicKey
 
 
 class CoseVerificationError(ValueError):

@@ -3,39 +3,40 @@
 Proof-Carrying Degraded Autonomy and Causal Recovery for Mission-Critical
 Cloud-Edge Systems.
 
-Release **v0.5.0** is the Phase 5 candidate. It adds bounded cached identity,
-boot-aware authenticated time intervals, canonical policy-bundle hashing, and a pinned local
-OPA/Rego enforcement boundary that fails safe on outage or mismatch.
+Release **v0.6.0** is the Phase 6 candidate. It adds canonical signed causal events,
+deterministic DAG validation, append-only recovery state, class-specific reconciliation,
+invalid-subtree quarantine, and signed receipts and checkpoints.
 
-Phase 4 was independently accepted against matching Windows and GitHub Actions evidence for
-commit `6fb314effdc5e45145593bbdd582e19f60914d5f`. Phase 5 is not complete until its
-own local and CI evidence are independently reviewed. Phase 6 is not authorized by an
+Phase 5 was independently accepted against matching Windows and GitHub Actions evidence for
+commit `150bf42abd864cb793a2c1de5eb8110b36034162`. Phase 6 is not complete until its
+own local and CI evidence are independently reviewed. Phase 7 is not authorized by an
 automated gate.
 
 The hospital emergency-continuity case study is a synthetic systems-resilience
 experiment. This is not a clinically validated medical system and must not be used
 for patient care.
 
-## What identity, time, and policy mean in this candidate
+## What causal recovery means in this candidate
 
 A consequential decision is dispatchable only after the edge has verified a signed,
 canonical decision certificate and its hash-linked authority chain, then atomically
 committed the certificate, nonce, cumulative budgets, financial exposure, and pending
 effect in SQLite. Ordinary logs do not satisfy this requirement.
 
-Offline identity is usable only inside explicit cache, assurance, role, expiry, and
-last-authenticated revocation-snapshot limits. The implementation does not claim that a
-disconnected snapshot is current. Authority time comes from an authenticated UTC anchor plus
-boot-aware elapsed time and drift bounds; the wall clock is diagnostic only. OPA decisions must
-match the exact semantic policy hash and version.
+An imported event is accepted only after its canonical signature, authorized edge identity,
+isolation epoch, lease and decision references, causal parents, sequence, vector clock, schema,
+and registered safety class verify. Invalid event subtrees are quarantined. S2 compensation is a
+new event, S3 conflicts require review, and S4 effects are never dispatched by reconciliation.
+Connectivity restoration and signed receipts do not restore authority; a fresh connected-epoch
+lease is mandatory.
 
 The candidate does **not** prove application correctness, sensor truth, clinical
-safety, hardware key protection, unbounded protocol correctness, causal recovery, or H5.
+safety, hardware key protection, unbounded protocol correctness, orchestration realism, or H5/H6.
 The TLA+ model treats cryptography ideally; byte-level cryptographic evidence and
 model-checking evidence are deliberately kept separate.
 
-See [the Phase 5 specification](docs/phase5/README.md) and
-[its limitations](docs/phase5/limitations.md).
+See [the Phase 6 specification](docs/phase6/README.md) and
+[its limitations](docs/phase6/limitations.md).
 
 ## Required local environment
 
@@ -65,48 +66,47 @@ Get-ChildItem .\scripts -Recurse -File -Filter *.ps1 | Unblock-File
 .\scripts\bootstrap.ps1
 ```
 
-## Run the Phase 5 gate
+## Run the Phase 6 gate
 
 ```powershell
-.\scripts\run_phase5_gate.ps1
+.\scripts\run_phase6_gate.ps1
 ```
 
 The gate performs frozen dependency installation; formatting, lint, strict typing,
-branch-aware coverage, security-negative tests, pinned OPA/Rego tests, byte-for-byte identity,
-time, and policy fixture regeneration, provenance capture, SBOM generation, and dependency
-auditing.
+branch-aware coverage, security-negative tests, byte-for-byte event/recovery vector regeneration,
+provenance capture, SBOM generation, and dependency auditing.
 
-Evidence is written to `evidence/phase5/generated/<UTC timestamp>/`. A successful
-automated run intentionally records `CONDITIONAL_PASS`, `phase5_complete: false`, and
-`phase6_authorized: false` until independent review compares local and CI archives.
+Evidence is written to `evidence/phase6/generated/<UTC timestamp>/`. A successful
+automated run intentionally records `CONDITIONAL_PASS`, `phase6_complete: false`, and
+`phase7_authorized: false` until independent review compares local and CI archives.
 
-## Preserve the local Phase 5 evidence archive
+## Preserve the local Phase 6 evidence archive
 
 ```powershell
-$LatestEvidence = Get-ChildItem .\evidence\phase5\generated -Directory |
+$LatestEvidence = Get-ChildItem .\evidence\phase6\generated -Directory |
     Sort-Object LastWriteTimeUtc -Descending |
     Select-Object -First 1
 $EvidenceZip = Join-Path (Split-Path $PWD -Parent) `
-    "EDGE-LIFELINE-Phase5-Local-Evidence-$($LatestEvidence.Name).zip"
+    "EDGE-LIFELINE-Phase6-Local-Evidence-$($LatestEvidence.Name).zip"
 Compress-Archive -Path "$($LatestEvidence.FullName)\*" `
     -DestinationPath $EvidenceZip -Force
 Get-FileHash $EvidenceZip -Algorithm SHA256
 Get-Content (Join-Path $LatestEvidence.FullName 'gate-decision.json') -Raw
 ```
 
-Push the candidate and retain the `phase5-validation-evidence` artifact from the
-GitHub Actions `identity-time-policy` job. Local and CI source manifests must resolve to the same
-commit and every manifest entry must verify before Phase 4 can pass.
+Push the candidate and retain the `phase6-validation-evidence` artifact from the
+GitHub Actions `causal-recovery` job. Local and CI source manifests must resolve to the same
+commit and every manifest entry must verify before Phase 7 can be authorized.
 
 ## Cleanup and rollback
 
-Remove only reproducible Phase 5 generated state:
+Remove only reproducible Phase 6 generated state:
 
 ```powershell
-Remove-Item .\evidence\phase5\generated -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item .\evidence\phase6\generated -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item .\.venv -Recurse -Force -ErrorAction SilentlyContinue
 ```
 
 Frozen vectors, source code, and evidence archives outside the repository are not
-removed. To abandon the candidate, switch to the accepted Phase 4 commit on another
+removed. To abandon the candidate, switch to the accepted Phase 5 commit on another
 branch; do not reset or delete evidence that has already been cited.

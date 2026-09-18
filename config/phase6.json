@@ -1,0 +1,19 @@
+{
+  "schema_version": "edge-lifeline-phase6-config-v1",
+  "synthetic_nonclinical": true,
+  "isolation_epoch": "epoch-phase6-fixture",
+  "event_schema": "edge-lifeline-causal-event-v1",
+  "receipt_schema": "edge-lifeline-reconciliation-receipt-v1",
+  "checkpoint_schema": "edge-lifeline-ledger-checkpoint-v1",
+  "automatic_merge_classes": [
+    "S0_OBSERVATIONAL",
+    "S1_COMMUTATIVE"
+  ],
+  "compensation_class": "S2_COMPENSATABLE",
+  "review_class": "S3_REVIEW_REQUIRED",
+  "no_replay_class": "S4_IRREVERSIBLE_PHYSICAL",
+  "quarantine_class": "S5_INVALID_OR_MALICIOUS",
+  "authority_restored_on_reconnect": false,
+  "fresh_connected_epoch_lease_required": true,
+  "scientific_boundary": "Synthetic mechanism validation only; Phase 7 orchestration and Phase 8 outcome experiments remain locked."
+}

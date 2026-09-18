@@ -18,7 +18,7 @@ def test_version_command(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     invoke(monkeypatch, ["version"])
-    assert capsys.readouterr().out.strip() == "0.5.0"
+    assert capsys.readouterr().out.strip() == "0.6.0"
 
 
 def test_run_id_command(
