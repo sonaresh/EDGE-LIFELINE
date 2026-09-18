@@ -11,18 +11,26 @@ def test_workload_manifest_uses_restricted_security_context() -> None:
     documents = list(
         yaml.safe_load_all(Path("infra/k3d/base/workload.yaml").read_text(encoding="utf-8"))
     )
+
     deployment = next(item for item in documents if item["kind"] == "Deployment")
     pod = deployment["spec"]["template"]["spec"]
     container = pod["containers"][0]
+
     assert pod["serviceAccountName"] == "edge-lifeline"
     assert pod["automountServiceAccountToken"] is False
     assert pod["securityContext"]["runAsNonRoot"] is True
     assert pod["securityContext"]["seccompProfile"]["type"] == "RuntimeDefault"
+
     assert container["securityContext"]["allowPrivilegeEscalation"] is False
     assert container["securityContext"]["readOnlyRootFilesystem"] is True
     assert container["securityContext"]["capabilities"]["drop"] == ["ALL"]
     assert container["imagePullPolicy"] == "Never"
     assert container["resources"]["limits"]
+
+    environment = next(
+        item for item in container["env"] if item["name"] == "EDGE_LIFELINE_ENVIRONMENT"
+    )
+    assert environment["value"] == "research"
 
 
 @pytest.mark.security

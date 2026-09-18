@@ -17,6 +17,7 @@ from edge_lifeline.orchestration import (
 
 
 def vector() -> dict[str, Any]:
+    """Build the deterministic Phase 7 runtime decision vector."""
     cases = (
         ClusterObservation(
             cluster_id="edge-a",
@@ -48,21 +49,47 @@ def vector() -> dict[str, Any]:
             fresh_connected_epoch_lease=False,
         ),
     )
+
     return {
         "schema_version": "edge-lifeline-phase7-runtime-vector-v1",
         "decisions": [decide_runtime_mode(case).model_dump(mode="json") for case in cases],
     }
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--output-directory", type=Path, required=True)
-    args = parser.parse_args()
-    args.output_directory.mkdir(parents=True, exist_ok=True)
-    (args.output_directory / "runtime-vector-v1.json").write_text(
-        json.dumps(vector(), indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
+def encoded_vector() -> bytes:
+    """Return canonical UTF-8 vector bytes with LF line endings."""
+    content = json.dumps(
+        vector(),
+        indent=2,
+        sort_keys=True,
+        ensure_ascii=False,
     )
+    return f"{content}\n".encode()
+
+
+def write_vector(output_directory: Path) -> Path:
+    """Write the deterministic vector and return its output path."""
+    output_directory.mkdir(parents=True, exist_ok=True)
+
+    output_path = output_directory / "runtime-vector-v1.json"
+    output_path.write_bytes(encoded_vector())
+
+    return output_path
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Generate deterministic Phase 7 orchestration vectors."
+    )
+    parser.add_argument(
+        "--output-directory",
+        type=Path,
+        required=True,
+        help="Directory where the Phase 7 runtime vector will be written.",
+    )
+    args = parser.parse_args()
+
+    write_vector(args.output_directory)
 
 
 if __name__ == "__main__":
