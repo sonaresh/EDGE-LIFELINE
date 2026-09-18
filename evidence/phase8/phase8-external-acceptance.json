@@ -1,0 +1,53 @@
+{
+  "schema_version": "phase8-external-acceptance-v1",
+  "recorded_at_utc": "2026-09-18T21:46:59Z",
+  "decision": "PASS",
+  "phase8_complete": true,
+  "phase9_authorized": true,
+  "accepted_source_commit": "c376cb5bd6fee1c63805c416b9b17f22cfa48066",
+  "source_archive_sha256": "7a6feca1a38df2e8ea9d52535284eed74ed4b3e619147de3b92de61f49dbe76b",
+  "local_archive_sha256": "4c299234d2dda08790c8d7f0906986dfe606e5b4b86a7758e5d8ab289d0b6a5f",
+  "ci_archive_sha256": "63c30b58e0802fef025f2ed883df179a208b9d630ff7e1f79a1d11394022af3f",
+  "github_actions_run_url": "https://github.com/sonaresh/EDGE-LIFELINE/actions/runs/35396931190",
+  "protocol_sha256": "69b4367aca9822d802773e8b30daa11144d654e926c0e7cd2dd5a023e620dd6e",
+  "oracle_sha256": "8ef5a994bff10e1856e277d33f0541277c3382b513c8c424e0eb042a11afc2f3",
+  "raw_results_sha256": "c6437f17ac3371d022da83a1cca535c48c02f2aa58514e14b4b5196e3660b49d",
+  "analysis_sha256": "f86caf7de464c93e89e12df6cbb449a73020675b2174c5dd582d6bf0065f5b35",
+  "evidence_manifest_entries_per_environment": 34,
+  "evidence_manifest_mismatches": 0,
+  "source_manifest_entries": 225,
+  "source_manifests_exact_match": true,
+  "experiment_cells": 1600,
+  "paired_traces": 200,
+  "excluded_runs": 0,
+  "infrastructure_failures": 0,
+  "tests_per_environment": 383,
+  "security_tests_per_environment": 155,
+  "phase8_tests_per_environment": 12,
+  "line_coverage_percent": 94.82,
+  "branch_coverage_percent": 85.85,
+  "combined_coverage_percent": 92.53,
+  "known_dependency_vulnerabilities": 0,
+  "sbom_components_per_environment": 93,
+  "primary_comparisons_favorable": 8,
+  "invariant_violation_guards_passed": 8,
+  "e9_full_tcb_profile": {
+    "classification": "DETECTION_ONLY",
+    "unsafe_executions": 38,
+    "prevention_claimed": false
+  },
+  "h4_measurements": {
+    "windows_verification_p99_ms": 2.1268,
+    "windows_admission_proxy_p99_ms": 2.3606,
+    "linux_verification_p99_ms": 1.369387,
+    "linux_admission_proxy_p99_ms": 1.516622,
+    "verification_target_ms": 10.0,
+    "admission_proxy_target_ms": 50.0
+  },
+  "platform_dependency_difference": {
+    "windows_only": "colorama==0.4.6",
+    "linux_only": "uvloop==0.22.1",
+    "assessment": "EXPECTED_PLATFORM_MARKER_DIFFERENCE"
+  },
+  "scientific_boundary": "Phase 8 validates reproducible paired synthetic cloud-edge resilience experiments and host-specific proof-processing measurements. It does not establish clinical efficacy, patient safety, production reliability, hardware-root assurance, or prevention under full-TCB compromise."
+}
