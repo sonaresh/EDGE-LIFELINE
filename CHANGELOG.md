@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.0 - 2026-09-18
+
+- Add deterministic publication and reproducibility packaging from the externally accepted Phase 8 record.
+- Generate manuscript-ready results, CSV tables, an SVG effect figure, claim-evidence mapping,
+  reproduction instructions, release metadata, checksums, and an archival manifest.
+- Fail closed on accepted commit, protocol, oracle, raw-result, analysis, or E9 boundary mismatch.
+- Preserve all accepted outcomes without rerunning experiments or introducing post-hoc exclusions.
+- Add Phase 9 security tests and a conditional final-release evidence gate.
+
 ## 0.8.0 - 2026-09-18
 
 - Add a frozen paired-factorial experiment across eight methods, E1-E20, and ten seeds.

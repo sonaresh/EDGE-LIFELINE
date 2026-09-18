@@ -205,6 +205,26 @@ def test_phase8_gate_is_conditional_and_preserves_experiment_evidence() -> None:
 
 
 @pytest.mark.security
+def test_phase9_gate_is_conditional_and_preserves_release_evidence() -> None:
+    script = Path("scripts/run_phase9_gate.ps1").read_text(encoding="utf-8")
+    assert "phase8-external-acceptance.json" in script
+    assert "generate_phase9_publication" in script
+    assert "phase9-negative-tests-junit.xml" in script
+    assert "experiment_rerun = $false" in script
+    assert "external_review_required = $true" in script
+    assert "phase9_complete = $false" in script
+    assert "public_release_authorized = $false" in script
+    workflow = yaml.safe_load(Path(".github/workflows/ci.yml").read_text(encoding="utf-8"))
+    steps = workflow["jobs"]["release-packaging"]["steps"]
+    gate = next(step for step in steps if step.get("name") == "Run Phase 9 gate")
+    upload = next(step for step in steps if step.get("name") == "Upload Phase 9 evidence")
+    assert "run_phase9_gate.ps1" in gate["run"]
+    assert upload["if"] == "always()"
+    assert upload["with"]["name"] == "phase9-validation-evidence"
+    assert upload["with"]["path"] == "evidence/phase9/generated/"
+
+
+@pytest.mark.security
 def test_opa_installer_is_version_pinned_and_checks_official_sha256() -> None:
     script = Path("scripts/install-opa.ps1").read_text(encoding="utf-8")
     assert "$Version = '1.19.1'" in script

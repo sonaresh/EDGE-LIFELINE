@@ -33,6 +33,7 @@ EXCLUDED_SOURCE_PREFIXES = (
     "evidence/phase6/generated/",
     "evidence/phase7/generated/",
     "evidence/phase8/generated/",
+    "evidence/phase9/generated/",
     "results/raw/",
     "results/processed/",
 )

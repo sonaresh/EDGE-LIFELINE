@@ -1,0 +1,25 @@
+{
+  "schema_version": "edge-lifeline-phase9-accepted-results-v1",
+  "accepted_source_commit": "c376cb5bd6fee1c63805c416b9b17f22cfa48066",
+  "protocol_sha256": "69b4367aca9822d802773e8b30daa11144d654e926c0e7cd2dd5a023e620dd6e",
+  "oracle_sha256": "8ef5a994bff10e1856e277d33f0541277c3382b513c8c424e0eb042a11afc2f3",
+  "raw_results_sha256": "c6437f17ac3371d022da83a1cca535c48c02f2aa58514e14b4b5196e3660b49d",
+  "analysis_sha256": "f86caf7de464c93e89e12df6cbb449a73020675b2174c5dd582d6bf0065f5b35",
+  "experiment_cells": 1600,
+  "paired_traces": 200,
+  "excluded_runs": 0,
+  "infrastructure_failures": 0,
+  "primary_comparisons": [
+    {"hypothesis":"H1","baseline":"B0","metric":"critical_availability","paired_blocks":60,"mean_favorable_difference":0.3255519047501004,"bootstrap_95_ci":[0.22783761249799855,0.4206728817070652],"holm_adjusted_p_value":0.0007999200079992001,"safety_guard_non_increasing":true},
+    {"hypothesis":"H2","baseline":"B1","metric":"unsafe_actions_executed","paired_blocks":90,"mean_favorable_difference":34.955555555555556,"bootstrap_95_ci":[30.28861111111111,39.300555555555555],"holm_adjusted_p_value":0.0007999200079992001,"safety_guard_non_increasing":true},
+    {"hypothesis":"H3","baseline":"B0","metric":"false_denials","paired_blocks":60,"mean_favorable_difference":18.416666666666668,"bootstrap_95_ci":[12.432500000000001,24.55083333333333],"holm_adjusted_p_value":0.0007999200079992001,"safety_guard_non_increasing":true},
+    {"hypothesis":"H5","baseline":"B6","metric":"utility_per_resource","paired_blocks":10,"mean_favorable_difference":0.17817418639783064,"bootstrap_95_ci":[0.1415636961081936,0.2149981772127754],"holm_adjusted_p_value":0.0023997600239976003,"safety_guard_non_increasing":true},
+    {"hypothesis":"H6","baseline":"B5","metric":"incorrect_conflict_resolutions","paired_blocks":30,"mean_favorable_difference":51.233333333333334,"bootstrap_95_ci":[48.69916666666667,53.8675],"holm_adjusted_p_value":0.0007999200079992001,"safety_guard_non_increasing":true},
+    {"hypothesis":"H7","baseline":"B3","metric":"invariant_violations","paired_blocks":20,"mean_favorable_difference":4.1,"bootstrap_95_ci":[2.45,6.05],"holm_adjusted_p_value":0.0007999200079992001,"safety_guard_non_increasing":true},
+    {"hypothesis":"H8","baseline":"B1","metric":"unsafe_actions_executed","paired_blocks":30,"mean_favorable_difference":27.766666666666666,"bootstrap_95_ci":[19.898333333333333,35.76749999999999],"holm_adjusted_p_value":0.0007999200079992001,"safety_guard_non_increasing":true},
+    {"hypothesis":"H9","baseline":"B2","metric":"invariant_violations","paired_blocks":40,"mean_favorable_difference":40.6,"bootstrap_95_ci":[38.24875,42.825],"holm_adjusted_p_value":0.0007999200079992001,"safety_guard_non_increasing":true}
+  ],
+  "e9_full_tcb_profile": {"classification":"DETECTION_ONLY","unsafe_executions":38,"prevention_claimed":false},
+  "h4_measurements": {"windows_verification_p99_ms":2.1268,"windows_admission_proxy_p99_ms":2.3606,"linux_verification_p99_ms":1.369387,"linux_admission_proxy_p99_ms":1.516622,"verification_target_ms":10.0,"admission_proxy_target_ms":50.0},
+  "scientific_boundary": "Synthetic paired cloud-edge resilience experiment and host-specific proof-processing measurements only; no clinical efficacy, patient-safety, production-reliability, hardware-root, or full-TCB-compromise prevention claim."
+}
