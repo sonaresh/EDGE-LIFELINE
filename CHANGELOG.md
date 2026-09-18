@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.0 - 2026-09-18
+
+- Add a pinned four-cluster k3d/K3s research topology with one cloud and three edge clusters.
+- Add restricted non-root workloads, disabled service-account token mounting, resource limits,
+  read-only filesystems, dropped capabilities, and default-deny network policy.
+- Add conservative orchestration-state decisions that cannot grant authority on reconnection.
+- Add deterministic pod-replacement and edge-cluster restart faults with mandatory cleanup.
+- Add frozen runtime vectors, static topology validation, security-negative tests, and the Phase 7 gate.
+- Preserve the no-AWS and synthetic mechanism-only boundary; keep Phase 8 experiments locked.
+
 ## 0.6.0 - 2026-08-27
 
 - Add canonical COSE/Ed25519 causal events with proof, lease, epoch, parent, vector-clock,

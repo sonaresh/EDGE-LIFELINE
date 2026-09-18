@@ -1,0 +1,11 @@
+schema_version: edge-lifeline-phase7-fault-plan-v1
+seed: 7001
+cases:
+  - id: F7-POD-RESTART
+    target: edge-a
+    action: delete_workload_pod
+    assertion: replacement_pod_becomes_ready_without_authority_expansion
+  - id: F7-EDGE-RESTART
+    target: edge-b
+    action: stop_and_restart_cluster
+    assertion: other_clusters_remain_ready_and_recovered_edge_requires_fresh_lease

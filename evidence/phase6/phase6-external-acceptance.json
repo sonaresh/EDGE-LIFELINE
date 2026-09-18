@@ -28,11 +28,5 @@
   "effect_replay_count": 0,
   "fresh_connected_epoch_lease_required": true,
   "sbom_components_per_environment": 93,
-  "known_dependency_vulnerabilities": 0,
-  "platform_dependency_difference": {
-    "windows_only": "colorama==0.4.6",
-    "linux_only": "uvloop==0.22.1",
-    "assessment": "EXPECTED_PLATFORM_MARKER_DIFFERENCE"
-  },
-  "scientific_boundary": "Phase 6 validates deterministic signed causal-ledger admission, class-specific reconciliation, quarantine propagation, compensation, exactly-once effect recording, and proof-linked recovery using synthetic nonclinical evidence. It does not establish clinical safety, production deployment assurance, current external authority, or Kubernetes orchestration safety."
+  "known_dependency_vulnerabilities": 0
 }

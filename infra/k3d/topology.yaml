@@ -1,0 +1,12 @@
+schema_version: edge-lifeline-topology-v1
+k3d_version: v5.9.0
+k3s_image: rancher/k3s:v1.37.0-k3s1
+clusters:
+  - id: cloud
+    role: cloud
+  - id: edge-a
+    role: edge
+  - id: edge-b
+    role: edge
+  - id: edge-c
+    role: edge

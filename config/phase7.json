@@ -1,0 +1,11 @@
+{
+  "schema_version": "edge-lifeline-phase7-config-v1",
+  "cluster_count": 4,
+  "cloud_clusters": 1,
+  "edge_clusters": 3,
+  "k3d_version": "5.9.0",
+  "k3s_image": "rancher/k3s:v1.37.0-k3s1",
+  "fault_seed": 7001,
+  "aws_resources_authorized": false,
+  "scientific_boundary": "Local four-cluster orchestration mechanism validation only; Phase 8 outcome experiments remain locked."
+}

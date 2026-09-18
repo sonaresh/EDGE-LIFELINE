@@ -3,14 +3,12 @@
 Proof-Carrying Degraded Autonomy and Causal Recovery for Mission-Critical
 Cloud-Edge Systems.
 
-Release **v0.6.0** is the Phase 6 candidate. It adds canonical signed causal events,
-deterministic DAG validation, append-only recovery state, class-specific reconciliation,
-invalid-subtree quarantine, and signed receipts and checkpoints.
+Release **v0.7.0** is the Phase 7 candidate. It adds a reproducible four-cluster local
+k3d/K3s topology, restricted workloads, deterministic faults, observation, recovery, and cleanup.
 
-Phase 5 was independently accepted against matching Windows and GitHub Actions evidence for
-commit `150bf42abd864cb793a2c1de5eb8110b36034162`. Phase 6 is not complete until its
-own local and CI evidence are independently reviewed. Phase 7 is not authorized by an
-automated gate.
+Phase 6 was independently accepted and recorded at commit
+`5034fb07f9d1f962b01a5246af2364695b8d7530`. Phase 7 is not complete until its own local and
+CI evidence are independently reviewed. Phase 8 is not authorized by an automated gate.
 
 The hospital emergency-continuity case study is a synthetic systems-resilience
 experiment. This is not a clinically validated medical system and must not be used
@@ -35,8 +33,8 @@ safety, hardware key protection, unbounded protocol correctness, orchestration r
 The TLA+ model treats cryptography ideally; byte-level cryptographic evidence and
 model-checking evidence are deliberately kept separate.
 
-See [the Phase 6 specification](docs/phase6/README.md) and
-[its limitations](docs/phase6/limitations.md).
+See [the Phase 7 specification](docs/phase7/README.md) and
+[its limitations](docs/phase7/limitations.md).
 
 ## Required local environment
 
@@ -66,44 +64,44 @@ Get-ChildItem .\scripts -Recurse -File -Filter *.ps1 | Unblock-File
 .\scripts\bootstrap.ps1
 ```
 
-## Run the Phase 6 gate
+## Run the Phase 7 gate
 
 ```powershell
-.\scripts\run_phase6_gate.ps1
+.\scripts\run_phase7_gate.ps1
 ```
 
 The gate performs frozen dependency installation; formatting, lint, strict typing,
 branch-aware coverage, security-negative tests, byte-for-byte event/recovery vector regeneration,
 provenance capture, SBOM generation, and dependency auditing.
 
-Evidence is written to `evidence/phase6/generated/<UTC timestamp>/`. A successful
-automated run intentionally records `CONDITIONAL_PASS`, `phase6_complete: false`, and
-`phase7_authorized: false` until independent review compares local and CI archives.
+Evidence is written to `evidence/phase7/generated/<UTC timestamp>/`. A successful
+automated run intentionally records `CONDITIONAL_PASS`, `phase7_complete: false`, and
+`phase8_authorized: false` until independent review compares local and CI archives.
 
-## Preserve the local Phase 6 evidence archive
+## Preserve the local Phase 7 evidence archive
 
 ```powershell
-$LatestEvidence = Get-ChildItem .\evidence\phase6\generated -Directory |
+$LatestEvidence = Get-ChildItem .\evidence\phase7\generated -Directory |
     Sort-Object LastWriteTimeUtc -Descending |
     Select-Object -First 1
 $EvidenceZip = Join-Path (Split-Path $PWD -Parent) `
-    "EDGE-LIFELINE-Phase6-Local-Evidence-$($LatestEvidence.Name).zip"
+    "EDGE-LIFELINE-Phase7-Local-Evidence-$($LatestEvidence.Name).zip"
 Compress-Archive -Path "$($LatestEvidence.FullName)\*" `
     -DestinationPath $EvidenceZip -Force
 Get-FileHash $EvidenceZip -Algorithm SHA256
 Get-Content (Join-Path $LatestEvidence.FullName 'gate-decision.json') -Raw
 ```
 
-Push the candidate and retain the `phase6-validation-evidence` artifact from the
-GitHub Actions `causal-recovery` job. Local and CI source manifests must resolve to the same
-commit and every manifest entry must verify before Phase 7 can be authorized.
+Push the candidate and retain the `phase7-validation-evidence` artifact from the
+GitHub Actions `orchestration` job. Local and CI source manifests must resolve to the same
+commit and every manifest entry must verify before Phase 8 can be authorized.
 
 ## Cleanup and rollback
 
-Remove only reproducible Phase 6 generated state:
+Remove only reproducible Phase 7 generated state:
 
 ```powershell
-Remove-Item .\evidence\phase6\generated -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item .\evidence\phase7\generated -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item .\.venv -Recurse -Force -ErrorAction SilentlyContinue
 ```
 

@@ -1,0 +1,26 @@
+{
+  "decisions": [
+    {
+      "authority_restored": false,
+      "cluster_id": "edge-a",
+      "effect_dispatch_allowed": true,
+      "mode": "degraded",
+      "reason": "bounded degraded operation under existing lease"
+    },
+    {
+      "authority_restored": false,
+      "cluster_id": "edge-b",
+      "effect_dispatch_allowed": false,
+      "mode": "protective",
+      "reason": "valid authority lease unavailable"
+    },
+    {
+      "authority_restored": false,
+      "cluster_id": "edge-c",
+      "effect_dispatch_allowed": false,
+      "mode": "protective",
+      "reason": "reconciliation cannot restore authority without a fresh lease"
+    }
+  ],
+  "schema_version": "edge-lifeline-phase7-runtime-vector-v1"
+}
