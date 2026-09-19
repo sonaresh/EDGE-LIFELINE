@@ -11,7 +11,7 @@ requires-python = ">=3.12,<3.13"
 license = { text = "Apache-2.0" }
 authors = [{ name = "Naresh Somara" }]
 dependencies = [
-  "cbor2>=5.7,<6",
+  "cbor2>=5.7,<7",
   "cryptography>=50.0.1,<51",
   "fastapi>=0.116,<1",
   "httpx>=0.28,<1",
