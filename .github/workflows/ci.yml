@@ -26,7 +26,7 @@ jobs:
           ./scripts/run_phase_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload validation evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase1-validation-evidence
           path: evidence/phase1/generated/
@@ -54,7 +54,7 @@ jobs:
           ./scripts/run_phase2_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 2 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase2-validation-evidence
           path: evidence/phase2/generated/
@@ -78,7 +78,7 @@ jobs:
           ./scripts/run_phase3_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 3 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase3-validation-evidence
           path: evidence/phase3/generated/
@@ -102,7 +102,7 @@ jobs:
           ./scripts/run_phase4_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 4 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase4-validation-evidence
           path: evidence/phase4/generated/
@@ -126,7 +126,7 @@ jobs:
           ./scripts/run_phase5_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 5 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase5-validation-evidence
           path: evidence/phase5/generated/
@@ -150,7 +150,7 @@ jobs:
           ./scripts/run_phase6_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 6 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase6-validation-evidence
           path: evidence/phase6/generated/
@@ -174,7 +174,7 @@ jobs:
           ./scripts/run_phase7_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 7 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase7-validation-evidence
           path: evidence/phase7/generated/
@@ -198,7 +198,7 @@ jobs:
           ./scripts/run_phase8_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 8 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase8-validation-evidence
           path: evidence/phase8/generated/
@@ -222,7 +222,7 @@ jobs:
           ./scripts/run_phase9_gate.ps1 -CiRunUrl "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
       - name: Upload Phase 9 evidence
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: phase9-validation-evidence
           path: evidence/phase9/generated/
